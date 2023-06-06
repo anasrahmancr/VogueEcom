@@ -1,0 +1,101 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-6">
+            <div class="content-header">
+                <h2 class="content-title">Edit Product</h2>
+            </div>
+        </div>
+    </div>
+    <form action="/admin/editProducts/<%=item._id %>" method="POST" enctype="multipart/form-data">
+        
+            <div class="row"> 
+                <div class="col-lg-6">
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>1. General info</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Product Name</label>
+                                        <input type="text" name="productname" placeholder="Type here" value="<%=item.productName %>" class="form-control" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <textarea placeholder="Type here" name="productdescription" class="form-control" rows="4" required><%- item.productDescription %></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Brand name</label>
+                                        <select class="form-select" name="brandName">
+                                            <option <% if (item.brands === 'Lee') { %>selected<% } %>>Lee</option>
+                                            <option <% if (item.brands === 'Basics') { %>selected<% } %>>Basics</option>
+                                            <option <% if (item.brands === 'Levis') { %>selected<% } %>>Levis</option>
+                                        </select>
+                                    </div>
+                                    
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>2. Pricing</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Original Price</label>
+                                        <input type="number" min="1" name="productprice" value="<%=item.productPrice %>" placeholder="Rupees" class="form-control"required>
+                                    </div>
+                                </div>
+                                 
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Sale Price</label>
+                                        <input type="number" min="0" name="productsaleprice" value="<%=item.productSalePrice %>" placeholder="Rupees" class="form-control"required>
+                                    </div>
+                                </div>
+
+                            </div> 
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>3. Category</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <% categories.forEach(category => { %>
+                                            <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                                <input class="form-check-input" value="<%= category.categoryName %>" name="mycategory" type="radio" <% if (category.categoryName === item.category) { %>checked<% } %> required>
+                                                <span class="form-check-label" > <%=category.categoryName  %>  </span>
+                                            </label>
+                                        <% }) %>
+                                        
+                                    </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>4. Media</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Images</label>
+                                        <input class="form-control" name="productimages" type="file" multiple required>
+                                        <img src="/productImages/<%=item.productImages[0] %>">
+                                    </div>
+                                </div> 
+                            </div> <!-- .row end// -->
+                        </div>
+                    </div>
+        
+                </div>
+             
+            </div>
+            </div>
+            <div>  
+                <button type="submit" class="btn btn-md rounded font-sm hover-up">Submit</button>
+            </div>
+        </form>
+        </section> <!-- content-main end// -->

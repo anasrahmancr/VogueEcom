@@ -1,0 +1,369 @@
+<main class="main">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html" rel="nofollow">Home</a>
+        <span></span> Shop <span></span> Checkout
+      </div>
+    </div>
+  </div>
+  <section class="mt-50 mb-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-sm-15">
+          <div class="toggle_info">
+            <span
+              ><i class="fi-rs-user mr-10"></i
+              ><span class="text-muted">Delivery Address</span>
+              <a
+                href="#loginform"
+                data-bs-toggle="collapse"
+                class="collapsed"
+                aria-expanded="false"
+                >Click here to Edit</a
+              ></span
+            >
+          </div>
+          <div class="panel-collapse collapse login_form" id="loginform">
+            <div class="panel-body">
+              <form method="post" action="/placeOrder">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="Username Or Email"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="login_footer form-group">
+                  <div class="chek-form">
+                    <div class="custome-checkbox">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="checkbox"
+                        id="remember"
+                        value=""
+                      />
+                      <label class="form-check-label" for="remember"
+                        ><span>Remember me</span></label
+                      >
+                    </div>
+                  </div>
+                  <a href="#">Forgot password?</a>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-md" name="login">Log in</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="divider mt-50 mb-50"></div>
+        </div>
+      </div>
+      <div class="row">
+        <form method="post" id="checkout-form">
+          <div class="col-md-6">
+            <div class="mb-25">
+              <h4>Billing Details</h4>
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                required=""
+                name="fname"
+                placeholder="First name *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                required=""
+                name="lname"
+                placeholder="Last name *"
+              />
+            </div>
+            <!-- <div class="form-group">
+                                <input required="" type="text" name="cname" placeholder="Company Name">
+                            </div> -->
+
+            <div class="form-group">
+              <input
+                type="text"
+                name="billing_address"
+                required=""
+                placeholder="Address *"
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                required=""
+                type="text"
+                name="state"
+                placeholder="State / County *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required=""
+                type="text"
+                name="city"
+                placeholder="City / Town *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required=""
+                type="text"
+                name="zipcode"
+                placeholder="Postcode / ZIP *"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required=""
+                type="text"
+                name="phone"
+                placeholder="Phone *"
+              />
+            </div>
+
+            <div class="mb-20">
+              <h5>Additional information</h5>
+            </div>
+            <div class="form-group mb-30">
+              <textarea rows="5" placeholder="Order notes"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="order_review">
+              <div class="mb-20">
+                <h4>Your Orders</h4>
+              </div>
+              <div class="table-responsive order_table text-center">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Product</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody class="form-group">
+                    <% items.forEach(item => { %>
+
+                    <tr>
+                      <td class="image product-thumbnail">
+                        <img
+                          src="/productImages/<%=item.prodId.productImages[0] %>"
+                          alt="#"
+                        />
+                      </td>
+                      <td>
+                        <h5>
+                          <a href="shop-product-full.html"
+                            ><%=item.prodId.productDescription %></a
+                          >
+                        </h5>
+                        <span class="product-qty"><%=item.quantity %></span>
+                      </td>
+                      <td>₹ <%=item.prodId.productPrice * item.quantity %></td>
+                    </tr>
+
+                    <% }) %>
+                    <tr>
+                      <th>SubTotal</th>
+                      <td class="product-subtotal" colspan="2">
+                        ₹ <%= total %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Shipping</th>
+                      <td colspan="2"><em>Free Shipping</em></td>
+                    </tr>
+                    <tr>
+                      <th>Total</th>
+                      <td colspan="2" class="product-subtotal">
+                        <span class="font-xl text-brand fw-900"
+                          >₹ <%= total %></span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <a
+                href="/userCart"
+                class="btn btn-fill-out btn-block mt-30"
+                style="background-color: blue; color: white"
+                >Edit Orders</a
+              >
+              <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+              <div class="payment_method">
+                <div class="mb-25">
+                  <h5>Payment</h5>
+                </div>
+                <div class="payment_option">
+                  <div class="custome-radio">
+                    <input
+                      class="form-check-input"
+                      required=""
+                      type="radio"
+                      name="payment_option"
+                      id="exampleRadios4"
+                      value="COD"
+                      checked=""
+                    />
+                    <label
+                      class="form-check-label"
+                      for="exampleRadios4"
+                      data-bs-toggle="collapse"
+                      data-target="#cod"
+                      aria-controls="cod"
+                      >Cash On Delivery</label
+                    >
+                  </div>
+
+                  <div class="custome-radio">
+                    <input
+                      class="form-check-input"
+                      required=""
+                      type="radio"
+                      name="payment_option"
+                      id="exampleRadios6"
+                      value="onlinepayment"
+                      checked=""
+                    />
+                    <label
+                      class="form-check-label"
+                      for="exampleRadios6"
+                      data-bs-toggle="collapse"
+                      data-target="#onlinepayment"
+                      aria-controls="onlinepayment"
+                      >Online Payment</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <button
+                onclick=" radiofunction()"
+                type="submit"
+                class="btn btn-fill-out btn-block mt-30"
+              >
+                Place Order
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  function radiofunction(){
+    $("#checkout-form").submit((e) => {
+      e.preventDefault();
+      console.log("check chechout");
+      $.ajax({
+        url: "/placeOrder",
+        method: "post",
+        data: $("#checkout-form").serialize(),
+
+        success: (response) => {
+          if(response.status === 'codSUCCESS'){
+            console.log("66666666666 INSIDE IF OF COD ");
+            location.href = "/codSuccess";
+            }
+             else {
+              console.log(response,'66666666 INSIDE ELSE OF ONLINE PAYMENT');
+            razorpayPayment(response)
+            }   
+        },
+      });
+    });
+  }
+  
+    function razorpayPayment(order){
+      console.log(order, " ORDER 7777777 INSIDE  RAZORPAY PAYMENT");
+      var options = {
+        key: "rzp_test_nG4cfXzI2IZx4E", // Enter the Key ID generated from the Dashboard
+        amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: "INR",
+        name: "Vogue", //your business name
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        handler: function (response) {
+          console.log(order, " ORDER 88888888888 INSIDE HANDLER FUNCTION ");
+          verifyPayment(order, response)
+        },
+        prefill: {
+          //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+          name: "Gaurav Kumar", //your customer's name
+          email: "gaurav.kumar@example.com",
+          contact: "9000090000", //Provide the customer's phone number for better conversion rates
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+    }
+
+    function verifyPayment(order, response){
+      console.log(order, "Order 99999999999999 INSIDE VERIFY PAYMENT");
+      $.ajax({
+        url: '/verifypayment',
+        data: {order, response},
+        method: 'post',
+        success: (response => {
+          if(response.status){
+            location.href = "/codSuccess";
+          } else{
+            console.log('INSIDE ELSE , UNSUCCESSFFULL');
+          }
+          
+        })
+        
+      })
+      
+    }
+ 
+</script>
+
+//
+<!-- <script>
+//     function radiofunction(){
+//         const paymentOptions = document.getElementsByName("payment_option");
+//     console.log('test');
+  
+//   for (let i = 0; i < paymentOptions.length; i++) {
+    
+//     if (paymentOptions[i].checked) {
+      
+//       const selectedPaymentOption = paymentOptions[i].value;
+//       console.log(selectedPaymentOption,"selected ");
+//       break;
+//     }
+//   }
+//     }
+  
+// </script> -->

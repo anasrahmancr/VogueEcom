@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vogue</title>
+  <% if (locals.admin) { %>
+    <%- include('./partials/admin/head') %>
+    <% }else{ %>
+      <%- include('./partials/user/head') %>
+    <% } %>
+</head>
+<% if (locals.admin) { %>
+  <%- include('./partials/admin/header') %>
+  <% }else{ %>
+    <%- include('./partials/user/header') %>
+  <% } %>
+<%- body %>
+  <% if (locals.admin) { %>
+    <%- include('./partials/admin/footer') %>
+    <% }else{ %>
+      <%- include('./partials/user/footer') %>
+    <% } %>
+
+    <% if (locals.admin) { %>
+      <%- include('./partials/admin/script') %>
+      <% }else{ %>
+        <%- include('./partials/user/script') %>
+      <% } %>
+</body>
+</html>

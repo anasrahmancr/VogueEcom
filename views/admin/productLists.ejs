@@ -1,0 +1,81 @@
+
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Products List</h2>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <header class="card-header">
+            <div class="row align-items-center">
+                <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+                    <select class="form-select">
+                        <option selected>All category</option>
+                        <option>Electronics</option>
+                        <option>Clothes</option>
+                        <option>Automobile</option>
+                    </select>
+                </div>
+            </div>
+        </header> <!-- card-header end// -->
+        <div class="card-body">
+            <% products.forEach(product => { %>         
+            <article class="itemlist">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
+                        <a class="itemside" href="#">
+                            <div class="left">
+
+                                <img src="/productImages/<%= product.productImages[0] %>" class="img-sm img-thumbnail" alt="Item">
+                            </div>
+                            <div class="info">
+                                <h6 class="mb-0 tooltipEll"><%= product.productName %></h6>
+                            </div>
+                            <div class="info">
+                                <h6 class="mb-0 tooltipEll"><%= product.productDescription %></h6>
+                            </div>
+                            <div class="info">
+                                <h6 class="mb-0 tooltipEll"><%= product.brands %></h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span>₹ <%= product.productPrice %></span> </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span>₹ <%= product.productSalePrice %></span> </div>
+                    
+                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+                        <a href="/admin/editProducts/<%=product._id %>" class="btn btn-sm font-sm rounded btn-brand">
+                            <i class="material-icons md-edit"></i> Edit
+                        </a>
+                        <a onclick="deleteProduct('<%=product._id%>')" class="btn btn-sm font-sm btn-light rounded">
+                            <i class="material-icons md-delete_forever"></i> Delete
+                        </a>
+                    </div>
+                </div> <!-- row .// -->
+            </article> <!-- itemlist  .// -->
+            <% }) %>
+        </div> <!-- card-body end// -->
+    </div> <!-- card end// -->
+    <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+              <% for (let i = 1; i <= totalPages; i++) { %>
+                  <li class="page-item <% if (currentPage === i) { %>active<% } %>">
+                      <a class="page-link" href="/admin/productManagement?page=<%= i %>"><%= i %></a></li>
+                <% } %>
+              </ul>
+        </nav>
+      </div>
+</section>
+
+<script>
+    function deleteProduct(prodId){
+        $.ajax({
+            url: "/admin/deleteProduct/" + prodId,
+            method: 'post',
+            success: (response) => {
+                console.log(response);
+                if(response.status)
+            }
+        })
+    }
+</script>

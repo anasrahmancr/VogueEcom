@@ -1,0 +1,100 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-6">
+            <div class="content-header">
+                <h2 class="content-title">Add New Coupon</h2>
+            </div>
+        </div>
+    </div>
+    <form action="/admin/editCoupon/<%=editcoupon._id %>" method="POST">
+        
+            <div class="row"> 
+                <div class="col-lg-6">
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Coupon Code</label>
+                                        <input type="text" name="couponcode" placeholder="Type here" value="<%=editcoupon.couponCode %>" class="form-control" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Discount Rate</label>
+                                        <input type="number" step="0.01" placeholder="Type here" value="<%=editcoupon.couponDiscount %>" name="coupondiscount" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Minimum Amount</label>
+                                        <input type="number" placeholder="Type here" value="<%=editcoupon.couponMinAmount %>" name="couponminamount" class="form-control" required></textarea>
+                                    </div>
+                                    
+                                    <!-- <div class="mb-4">
+                                        <label class="form-label">Brand name</label>
+                                        <select class="form-select">
+                                            <option> Lee </option>
+                                            <option> Basics </option>
+                                            <option> Levis </option>
+                                        </select>
+                                    </div> -->
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Expiry Date</label>
+                                        <input type="date" name="expiredate" value="<%=editcoupon.expireDate.toISOString().split('T')[0] %>" placeholder="dd/mm/yyyy" class="form-control"required>
+                                    </div>
+                                </div>
+
+                            </div> 
+                            <hr class="mb-4 mt-0">
+                            <!-- <div class="row"> -->
+                                <!-- <div class="col-md-3">
+                                    <h6>3. Category</h6>
+                                </div> -->
+                                <!-- <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <%# categories.forEach(category => { %>
+                                            <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                                <input class="form-check-input" checked="" value="<%#= category.categoryName %>" name="mycategory" type="radio" required>
+                                                <span class="form-check-label" > <%#=category.categoryName  %>  </span>
+                                            </label>
+                                        <%# }) %>
+                                        
+                                    </div>
+                                </div> col.// -->
+                            <!-- </div> row -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Active</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                            <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                                <input class="form-check-input" checked="" value="true" name="status" type="radio" required> True
+                                                <span class="form-check-label" ></span>
+                                            </label>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                            <input class="form-check-input" checked="" value="false" name="status" type="radio" required>False
+                                            <span class="form-check-label" ></span>
+                                        </label>
+                                </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                        </div>
+                    </div>
+        
+                </div>
+             
+            </div>
+            </div>
+            <div>  
+                <button type="submit" class="btn btn-md rounded font-sm hover-up">Submit</button>
+            </div>
+        </form>
+        </section>

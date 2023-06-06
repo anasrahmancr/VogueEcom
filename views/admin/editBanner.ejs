@@ -1,0 +1,134 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-6">
+            <div class="content-header">
+                <h2 class="content-title">Add New Banner</h2>
+            </div>
+        </div>
+    </div>
+    <form action="/admin/editBanner/<%= editBanner._id %>" method="POST" enctype="multipart/form-data">
+        
+            <div class="row"> 
+                <div class="col-lg-6">
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>General info</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Banner Title</label>
+                                        <input type="text" name="bannername" placeholder="Type here" value="<%=editBanner.Title %>" class="form-control" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Message</label>
+                                        <input placeholder="Type here" value="<%=editBanner.Message %>" name="bannerMessage" class="form-control" rows="4" required></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <input placeholder="Type here" value="<%=editBanner.Description %>" name="bannerDescription" class="form-control" rows="4" required></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Button Name</label>
+                                        <input placeholder="Type here" value="<%=editBanner.ButtonName %>" name="buttonName" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Button Link</label>
+                                        <input placeholder="Type here" value="<%=editBanner.ButtonUrl %>" name="buttonLink" class="form-control" required></textarea>
+                                    </div>
+                                    
+                                    <!-- <div class="mb-4">
+                                        <label class="form-label">Brand name</label>
+                                        <select class="form-select">
+                                            <option> Lee </option>
+                                            <option> Basics </option>
+                                            <option> Levis </option>
+                                        </select>
+                                    </div> -->
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Banner Period</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Start Date</label>
+                                        <input type="date" value="<%=editBanner.StartDate.toISOString().split('T')[0]  %>" name="startdate" placeholder="dd/mm/yyyy" class="form-control"required>
+                                    </div>
+                                </div>
+                                 
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">End Date</label>
+                                        <input type="date" value="<%=editBanner.EndDate.toISOString().split('T')[0]  %>" name="enddate" placeholder="dd/mm/yyyy" class="form-control"required>
+                                    </div>
+                                </div>
+
+                            </div> 
+                            <hr class="mb-4 mt-0">
+                            <!-- <div class="row"> -->
+                                <!-- <div class="col-md-3">
+                                    <h6>3. Category</h6>
+                                </div> -->
+                                <!-- <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <%# categories.forEach(category => { %>
+                                            <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                                <input class="form-check-input" checked="" value="<%#= category.categoryName %>" name="mycategory" type="radio" required>
+                                                <span class="form-check-label" > <%#=category.categoryName  %>  </span>
+                                            </label>
+                                        <%# }) %>
+                                        
+                                    </div>
+                                </div> col.// -->
+                            <!-- </div> row -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Media</h6>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Images</label>
+                                        <input class="form-control"  name="bannerimages" type="file" multiple required>
+                                        <img src="/productImages/<%=editBanner.Image[0] %>">
+                                    </div>
+                                </div> 
+                            </div> <!-- .row end// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Status</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                            <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                                <input class="form-check-input" value="<%=isActive %>" checked="" name="status" type="radio" required> Enable
+                                                <span class="form-check-label" ></span>
+                                            </label>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                            <input class="form-check-input" value="<%=isActive %>" checked=""  name="status" type="radio" required>Disable
+                                            <span class="form-check-label" ></span>
+                                        </label>
+                                </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                        </div>
+                    </div>
+        
+                </div>
+             
+            </div>
+            </div>
+            <div>  
+                <button type="submit" class="btn btn-md rounded font-sm hover-up">Submit</button>
+            </div>
+        </form>
+        </section>

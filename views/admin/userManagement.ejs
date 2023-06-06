@@ -1,0 +1,131 @@
+<table class="table table-hover my-0">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <!-- <th>Status</th>
+      <th>Edit</th> -->
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+    <tr>
+      <td><%= user.userName %></td>
+      <td><%= user.userEmail %></td>
+      <td><%= user.userPhone %></td>
+      <!-- <td><span class="badge bg-success">Done</span></td> -->
+      <!-- <td>
+        <a href="/admin/editUsers/<%#= user._id %>"
+          ><button type="button" class="btn btn-info">EDIT</button></a
+        >
+      </td> -->
+      <% if (user.isBlocked) { %>
+        <td>
+          <a onclick="blockuser('<%= user._id %>')"
+            ><button
+              type="button"
+              class="btn btn-success"
+              id="blockButton<%=user._id %>"
+            >UNBLOCK</button></a
+          >
+        </td>
+        <% } else { %>
+          <td>
+            <a onclick="blockuser('<%= user._id %>')"
+              ><button
+                type="button"
+                class="btn btn-danger"
+                id="blockButton<%=user._id %>"
+              >BLOCK</button></a
+            >
+          </td>
+        <% } %>
+      
+
+      <!-- href="/admin/blockUser/<%#= user._id %>"> -->
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+  <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-start">
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <li class="page-item <% if (currentPage === i) { %>active<% } %>">
+                <a class="page-link" href="/admin/userManagement?page=<%= i %>"><%= i %></a></li>
+          <% } %>
+        </ul>
+  </nav>
+</div>
+
+<script>
+  
+  function blockuser(userId) {
+    const blockUserId = document.getElementById("blockButton" + userId);
+    console.log(blockUserId.innerHTML);
+    if (blockUserId.innerHTML === "BLOCK") {
+      console.log(blockUserId.innerHTML);
+      blockUserId.innerHTML = "UNBLOCK";
+      
+
+      $.ajax({
+        url: "/admin/blockUser/" + userId,
+
+        method: "post",
+        success: (response) => {
+          // if(response.button === 'green'){
+            const button = document.getElementById("blockButton" + userId);
+            button.style.backgroundColor = "green";
+          // }
+          Toastify({
+            text: response.message,
+            duration: 5000,
+
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+        },
+        error: (error) => {
+          console.error("Error:", error);
+        },
+      });
+    } else {
+      blockUserId.innerHTML = "BLOCK";
+
+      $.ajax({
+        url: "/admin/unblockUser/" + userId,
+
+        method: "post",
+        success: (response) => {
+          const button = document.getElementById("blockButton" + userId);
+            button.style.backgroundColor = "red";
+          Toastify({
+            text: response.message,
+            duration: 5000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+        },
+        error: (error) => {
+          console.error("Error:", error);
+        },
+      });
+    }
+  }
+</script>

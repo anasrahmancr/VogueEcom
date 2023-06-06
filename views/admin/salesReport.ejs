@@ -1,0 +1,55 @@
+<div class="card-body">
+    <div class="table-responsive">
+        <table id="salesTable" class="display">
+            <thead>
+              <tr>
+                <th>Order Receipt</th>
+                <th>Billing Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Shipping Status</th>
+                <th>Payment Method</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(order => { %>
+                <tr>
+                  <td class="fw-bold"><%=order._id %></td>
+                  <td>
+                    <%= order.deliveryAddress[0].fname %> <%=
+                    order.deliveryAddress[0].lname%> <%=
+                    order.deliveryAddress[0].state%> <%=
+                    order.deliveryAddress[0].city%> <%=
+                    order.deliveryAddress[0].zipcode%>
+                  </td>
+                  <td><%= order.date %></td>
+                  <td><%= order.totalAmount %></td>
+                  <td>
+                    <span class="badge badge-pill badge-soft-success"
+                      ><%= order.shipping_status %></span
+                    >
+                  </td>
+                  <td><%= order.paymentMethod %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+          </table>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+  $('#salesTable').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+      'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+});
+
+  </script>
+
+
+
+
+
+

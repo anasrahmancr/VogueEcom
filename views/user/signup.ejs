@@ -1,0 +1,94 @@
+<main class="main">
+	<div class="page-header breadcrumb-wrap">
+		<div class="container">
+			<div class="breadcrumb">
+				<a href="/" rel="nofollow">Home</a>
+				<span></span> Pages
+				<span></span> Login / Register
+			</div>
+		</div>
+	</div>
+	<section class="pt-150 pb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 m-auto">
+					<div class="row">
+						<div class="col-lg-6 m-auto">
+							<div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
+								<div class="padding_eight_all bg-white">
+									<div class="heading_s1">
+										<h3 class="mb-30">Create an Account</h3>
+									</div>
+									<div>
+									<% if (errorMessage) { %>
+										<p id="error-message"> Error: <%= errorMessage %></p>
+										<% } %>
+									</div>
+									<form method="post">
+										<div class="form-group">
+											<input type="text" required="" name="username" placeholder="Username">
+										</div>
+										<div class="form-group">
+											<input type="email" required="" name="useremail" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<input type="tel" required="" name="userphone" placeholder="Phone">
+										</div>
+										<div class="form-group">
+											<input required="" type="password" minlength="8" maxlength="16" name="userpassword" placeholder="Password">
+										</div>
+										<div class="form-group">
+											<input required="" type="password" minlength="8" maxlength="16" name="confirmpassword" placeholder="Confirm password">
+										</div>
+										<!-- <div class="login_footer form-group"> -->
+											<!-- <div class="chek-form">
+												<div class="custome-checkbox">
+													<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="">
+													<label class="form-check-label" for="exampleCheckbox12"><span>I agree to terms &amp; Policy.</span></label>
+												</div>
+											</div> -->
+											<!-- <a href="page-privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Lean more</a> -->
+										<!-- </div> -->
+										<div class="form-group">
+											<button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Submit &amp; Register</button>
+										</div>
+									</form>
+									<div class="divider-text-center mt-15 mb-15">
+										<span> or</span>
+									</div>
+									<ul class="btn-login list_none text-center mb-15">
+										<!-- <li><a href="#" class="btn btn-facebook hover-up mb-lg-0 mb-sm-4">Login With Facebook</a></li> -->
+										<li><a href="#" class="btn btn-google hover-up">Login With Google</a></li>
+									</ul>
+									<div class="text-muted text-center">Already have an account? <a href="/login">Sign in now</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+<script>
+  // Get the error message element
+  const errorMessageElement = document.getElementById('error-message');
+
+  // Display the error message and set a timeout to hide it after 3 seconds
+  const displayErrorMessage = (message) => {
+    errorMessageElement.innerText = message;
+    errorMessageElement.style.color = 'red'; // Set the color to red
+    errorMessageElement.style.display = 'block';
+    setTimeout(hideErrorMessage, 3000); // Change the timeout duration as needed
+  };
+
+  // Hide the error message
+  const hideErrorMessage = () => {
+    errorMessageElement.innerText = '';
+    errorMessageElement.style.display = 'none';
+  };
+
+  // Call the displayErrorMessage function with the message from the server-side
+  displayErrorMessage('<%= errorMessage %>'); // Replace with the correct variable name for the error message
+</script>

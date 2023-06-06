@@ -1,0 +1,109 @@
+<section class="content-main">
+    <div class="row">
+        <div class="col-6">
+            <div class="content-header">
+                <h2 class="content-title">Add New Banner</h2>
+            </div>
+        </div>
+    </div>
+    <form action="/admin/addBanner" method="POST" enctype="multipart/form-data">
+        
+            <div class="row"> 
+                <div class="col-lg-6">
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>General info</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Banner Title</label>
+                                        <input type="text" name="bannername" placeholder="Type here" class="form-control" required oninvalid="setCustomValidity('Please enter the BANNER TITLE.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Message</label>
+                                        <textarea placeholder="Type here" name="bannerMessage" class="form-control" rows="4" required oninvalid="setCustomValidity('Please Enter the BANNER MESSAGE.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <textarea placeholder="Type here" name="bannerDescription" class="form-control" rows="4" required oninvalid="setCustomValidity('Please Enter the DESCRIPTION.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Button Name</label>
+                                        <input placeholder="Type here" name="buttonName" class="form-control" required oninvalid="setCustomValidity('Please Enter the BUTTON NAME.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Button Link</label>
+                                        <input placeholder="Type here" name="buttonLink" class="form-control" required oninvalid="setCustomValidity('Please Enter the BUTTON LINK.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';"></textarea>
+                                    </div>
+                                    
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Banner Period</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Start Date</label>
+                                        <input type="date" name="startdate" placeholder="dd/mm/yyyy" class="form-control"required oninvalid="setCustomValidity('Please Enter the START DATE.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';">
+                                    </div>
+                                </div>
+                                 
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">End Date</label>
+                                        <input type="date" name="enddate" placeholder="dd/mm/yyyy" class="form-control"required oninvalid="setCustomValidity('Please Enter the END DATE.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';">
+                                    </div>
+                                </div>
+
+                            </div> 
+                            <hr class="mb-4 mt-0">
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Media</h6>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Images</label>
+                                        <input class="form-control" name="bannerimages" type="file" multiple required oninvalid="setCustomValidity('Please upload the IMAGES.'); this.style.borderColor = 'red'; this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';" oninput="this.setCustomValidity(''); this.style.borderColor = ''; this.style.backgroundColor = '';">
+                                    </div>
+                                </div> 
+                            </div> <!-- .row end// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>Status</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                            <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                                <input class="form-check-input" checked="" value="enable" name="status" type="radio" required> Enable
+                                                <span class="form-check-label" ></span>
+                                            </label>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                            <input class="form-check-input" checked="" value="disable" name="status" type="radio" required>Disable
+                                            <span class="form-check-label" ></span>
+                                        </label>
+                                </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                        </div>
+                    </div>
+        
+                </div>
+             
+            </div>
+            </div>
+            <div>  
+                <button type="submit" class="btn btn-md rounded font-sm hover-up">Submit</button>
+            </div>
+        </form>
+        </section>

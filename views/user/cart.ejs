@@ -1,0 +1,395 @@
+<main class="main">
+  <div class="page-header breadcrumb-wrap">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html" rel="nofollow">Home</a>
+        <span></span> Shop <span></span> Your Cart
+      </div>
+    </div>
+  </div>
+  <section class="mt-50 mb-50">
+    <div class="container">
+      <div><h4
+         style="text-align: center; padding-bottom: 50px; color: rgb(71, 0, 138);">Cart Items</h4></div>
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table shopping-summery text-center clean">
+              <thead>
+                <tr class="main-heading">
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cartItems.items.forEach(function(item) { %>
+                <tr data-prodId="<%= item.prodId._id %>">
+                  <td class="image">
+                    <img
+                      src="/productImages/<%= item.prodId.productImages[0] %>"
+                      alt="#"
+                    />
+                  </td>
+                  <td class="product-des">
+                    <h5 class="product-name">
+                      <a href="shop-product-right.html">
+                        <%= item.prodId.productName %>
+                      </a>
+                    </h5>
+
+                    <p class="font-xs">
+                      <%= item.prodId.productDescription %><br />
+                    </p>
+                  </td>
+                  <td class="price" data-title="Price">
+                    <span> <%= item.prodId.productPrice %> </span>
+                  </td>
+                  <td class="text-center" data-title="Stock">
+                    <button
+                      class="cart-item-count ml-4"
+                      id="decrement-button<%=item.prodId._id%> qtyBtn"
+                      onclick="changeQuantity('<%=userId%>','<%=item.prodId._id%>',-1,'<%=item.prodId.subTotal%>','<%=item.prodId.productPrice%>')"
+                    >
+                      -
+                    </button>
+                    <span class="qty-val" id="<%=item.prodId._id%>"
+                      ><%=item.quantity %></span
+                    >
+                    <button
+                      class="cart-item-count mr-4"
+                      id="increment-button qtyBtn"
+                      onclick="changeQuantity('<%=userId%>','<%=item.prodId._id%>',1,'<%=item.prodId.subTotal%>','<%=item.prodId.productPrice%>')"
+                    >
+                      +
+                    </button>
+                  </td>
+                  <td class="text-right" data-title="Cart">
+                    <span class="subTotal" id="subtotal<%=item.prodId._id%>"
+                      ><%= item.prodId.productPrice * item.quantity %></span
+                    >
+                  </td>
+                  <td class="action" data-title="Remove">
+                    <a
+                      onclick="removefromcart('<%=item.prodId._id %>')"
+                      class="text-muted"
+                      ><i class="fi-rs-trash"></i
+                    ></a>
+                  </td>
+                </tr>
+                <% }) %>
+                <!-- <tr>
+                                        <td colspan="6" class="text-end">
+                                            <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
+                                        </td>
+                                    </tr> -->
+              </tbody>
+            </table>
+          </div>
+          <div class="cart-action text-end">
+            <!-- <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a> -->
+            <a class="btn" href="/"
+              ><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a
+            >
+          </div>
+          <div class="divider center_icon mt-50 mb-50">
+            <i class="fi-rs-fingerprint"></i>
+          </div>
+          <div class="row mb-50">
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-30 mt-50">
+                <div class="heading_s1 mb-3">
+                  <h4>Apply Coupon</h4>
+                </div>
+                <div class="total-amount">
+                  <div class="left">
+                    <div class="coupon">
+                      <!-- <form action="#" target="_blank"> -->
+                        <div class="form-row row justify-content-center">
+                          <div class="form-group col-lg-6">
+                            <input
+                              class="font-medium"
+                              name="Coupon"
+                              placeholder="Enter Your Coupon"
+                              id="couponcode"
+                              
+                            />
+                          </div>
+                          <div class="form-group col-lg-6">
+                            <button onclick="applycoupon()" class="btn btn-sm">
+                              <i class="fi-rs-label mr-10"></i>Apply
+                            </button>
+                          </div>
+                        </div>
+                      <!-- </form>/ -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h5>Available coupons</h5>
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+                  <% couponData.forEach(coupon => { %>
+                  <tr>
+                    <td class="coupon_id"><%=coupon.couponCode %></td>
+                    <td class="coupondiscountrate"><%= coupon.couponDiscount * 100 %>%</td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12">
+              <div class="border p-md-4 p-30 border-radius cart-totals">
+                <div class="heading_s1 mb-3">
+                  <h4>Cart Totals</h4>
+                </div>
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td class="cart_total_label">Cart Subtotal</td>
+                        <td class="cart_total_amount">
+                          <span
+                            id="total"
+                            class="font-lg fw-900 text-brand"
+                          ></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="cart_total_label">Coupon Discount</td>
+                        <td class="cart_total_amount">
+                          <i id="discountedAmount" class="ti-gift mr-5"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="cart_total_label">Shipping</td>
+                        <td class="cart_total_amount">
+                          <i class="ti-gift mr-5"></i> Free Shipping
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="cart_total_label">Total</td>
+                        <td class="cart_total_amount">
+                          <strong
+                            ><span
+                              id="totalAmount"
+                              class="font-xl fw-900 text-brand"
+                            ></span
+                          ></strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- <a class="btn" onclick="cartTotal(document.getElementById('totalAmount').textContent)" href="/checkout">
+                  <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a> -->
+                <a
+                  class="btn"
+                  onclick="event.preventDefault(); cartTotal(document.getElementById('totalAmount').textContent)"
+                  href="/checkout"
+                >
+                  <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  function changeQuantity(cartId, prodId, count, subTotal, productPrice) {
+    let quantity = parseInt(document.getElementById(prodId).innerHTML);
+    let subtotal = parseInt(document.getElementById(prodId).innerHTML);
+    count = parseInt(count);
+    subTotal = parseInt(subTotal);
+    productPrice = parseInt(productPrice);
+    // parseInt(subTotal)
+    if (quantity + count > 0) {
+      $.ajax({
+        url: "/changeQuantity",
+        data: {
+          cart: cartId,
+          product: prodId,
+          subTotal: subTotal,
+          count: count,
+          quantity: quantity,
+          productPrice: productPrice,
+        },
+        method: "post",
+        success: (response) => {
+          Toastify({
+            text: "Quantity Updated",
+            duration: 500,
+
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+
+          let cartTotalElement = document.getElementById("total");
+          let cartTotal = parseInt(cartTotalElement.textContent);
+
+          document.getElementById(prodId).innerHTML = response.quantity;
+          document.getElementById("subtotal" + prodId).innerHTML =
+            response.subTotal;
+          document.getElementById("total").innerHTML =
+            response.total + cartTotal;
+          document.getElementById("totalAmount").innerHTML =
+            response.total + cartTotal;
+        },
+      });
+    }
+  }
+</script>
+
+<script>
+  function removefromcart(prodId) {
+    $.ajax({
+      url: "/removeFromCart/" + prodId,
+      // data:{
+      //     prodId: prodId
+      // },
+      method: "post",
+      success: (response) => {
+        console.log(response, "resp");
+        if (response.status === true) {
+          const row = $('tr[data-prodId="' + prodId + '"]');
+          row.remove();
+        }
+        Toastify({
+          text: response.message,
+          duration: 1000,
+
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "center", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+          },
+          onClick: function () {}, // Callback after click
+        }).showToast();
+      },
+      error: (error) => {
+        console.error("Error:", error);
+      },
+    });
+  }
+</script>
+
+<script>
+  const totalElement = document.getElementById("total");
+  const totalAmountElement = document.getElementById("totalAmount");
+
+  function calculateTotal() {
+    const subtotalElements = document.querySelectorAll(".subTotal");
+    let subtotalSum = 0;
+
+    // Loop through each subtotal element
+    subtotalElements.forEach((subtotalElement) => {
+      const subtotal = parseFloat(subtotalElement.textContent);
+      subtotalSum += subtotal;
+    });
+
+    // Assign the sum to the "total" element
+    totalElement.textContent = subtotalSum.toFixed(2); // Adjust the formatting as needed
+    totalAmountElement.textContent = subtotalSum.toFixed(2);
+  }
+
+  // Call calculateTotal() when the cart page loads
+  document.addEventListener("DOMContentLoaded", calculateTotal);
+</script>
+
+<script>
+  function cartTotal(total) {
+    total = parseInt(total);
+    $.ajax({
+      url: "/cartTotal/" + total,
+      // data:{
+      //     total: total
+      // },
+      method: "post",
+      success: (response) => {
+        console.log(response);
+        // alert("Cart total updated successfully!");
+        window.location.href = "/checkout";
+      },
+      error: (error) => {
+        console.error("Error:", error);
+      },
+    });
+  }
+</script>
+
+<script>
+  function applycoupon(){
+    const couponName = document.getElementById('couponcode').value;
+    const cartSubtotal = document.getElementById('total').innerHTML;
+    console.log(couponName,"coupon", cartSubtotal, "cartSubtotal");
+    $.ajax({
+      url: "/couponData",
+      data:{
+        cartSubtotal: cartSubtotal,
+        couponName: couponName
+      },
+      method: "post",
+      success: (response) => {
+        console.log(response);
+        if(response.status){
+          document.getElementById('discountedAmount').innerHTML = response.discountedAmount;
+          document.getElementById('totalAmount').innerHTML = response.cartSubtotal;
+        
+        Toastify({
+          text: response.message,
+          duration: 1000,
+
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "center", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+          },
+          onClick: function () {}, // Callback after click
+        }).showToast();
+    } else{
+      Toastify({
+          text: response.message,
+          duration: 2000,
+
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "center", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, red, red)",
+
+          },
+          onClick: function () {}, // Callback after click
+        }).showToast();
+    }
+      },
+      error: (error) => {
+        console.error("Error:", error);
+      },
+    });
+  }
+</script>
