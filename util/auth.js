@@ -11,9 +11,6 @@ const client = require('twilio')(accountSid, authToken);
 module.exports = { 
 
     sendOtp: ((userphone) => {
-        console.log(userphone,"userppppppppp");
-        
-    
         client.verify.v2.services(serviceSid)
             .verifications
             .create({to: '+91' + userphone, channel: 'sms'})
@@ -23,7 +20,6 @@ module.exports = {
     }),
     
     checkOtp : ((userphone,otpData) => {
-        console.log(userphone,otpData,"useruserphonehone");
     return client.verify.v2.services(serviceSid)
       .verificationChecks    
       .create({to: '+91' + userphone, code: otpData})
@@ -31,8 +27,7 @@ module.exports = {
         console.log(verification_check.status);
         if(verification_check.status === 'approved'){
             return true ;
-        }
-        else{
+        } else{
             return false;
         }
       });
