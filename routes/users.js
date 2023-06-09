@@ -5,11 +5,11 @@ const userAuths = require('../controllers/user/authControllers')
 const {cartData, addToCart, changeQuantity, removeFromCart, cartTotal, getActiveCoupon} = require('../controllers/user/cartControllers')
 const {addWishlist, wishlist, removeFromWishlist} = require('../controllers/user/wishlistControllers')
 const {mens,womens,kids,shopView, productDetails, testShop} = require('../controllers/user/productControllers')
-const {userLogin, checkDuplicate, userheaderMiddleware, categoriesMiddleware} = require('../util/middleware')
+const {userLogin, userheaderMiddleware, categoriesMiddleware} = require('../util/middleware')
 const {checkout, placeOrder, verifyPayment, codSuccess, cancelOrder, returnProducts, vieworderedProducts} = require('../controllers/user/orderControllers')
 const {myOrders, userAccount} = require('../controllers/user/userControllers');
-// const {headerMiddleware, checkBlocked} = require('../util/middleware')
-// const {removeFromWishlist} = require('../controllers/user/wishlistControllers')
+const {headCartCount, headWishlistCount} = require('../controllers/user/userHeaderControllers')
+
 
 router.use(userheaderMiddleware);
 router.use(categoriesMiddleware);
@@ -19,6 +19,8 @@ router.use(categoriesMiddleware);
 router.get('/',homePage);
 
 // Navbar
+router.get('/headerCartCount/:id', headCartCount);
+router.get('/headerWishlistCount/:id', headWishlistCount);
 
 router.get('/about',aboutPage)
 router.get('/blog',blog)
@@ -38,7 +40,7 @@ router.get('/logout',userAuths.userLogout)
 router.get('/signup',userAuths.userSignup)
 router.post('/signup',userAuths.userSignupData)
 
-router.get('/otpverify',userAuths.otpVerification)
+router.get('/otpVerify',userAuths.otpVerification)
 router.post('/otpverify',userAuths.otpData)
 
 // Shop  Men women kids 

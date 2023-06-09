@@ -11,7 +11,6 @@ module.exports = {
     wishlist: (req, res) => {
         const user = req.session.user._id;
         getWishlist(user).then(response => {
-            console.log(response,"test response");
             if(response.getWishlist){
                 const wishlist = response.getWishlist;
                 res.render('user/wishlist',{wishlist:wishlist});
@@ -32,7 +31,6 @@ module.exports = {
             const message = response.message;
             const wish = response.wish;
             const status = response.status;
-            console.log(wish,"wishlist");
             res.json({message: message, wish: wish, status: status});
         })
     }

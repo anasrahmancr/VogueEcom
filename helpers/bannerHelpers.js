@@ -27,7 +27,6 @@ module.exports = {
                 resolve({status: true, message: 'banner added successfully'})
             }
             catch(error){
-                console.log(error);
                 reject(error);
             }
         })

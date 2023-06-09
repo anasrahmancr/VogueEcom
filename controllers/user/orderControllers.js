@@ -11,7 +11,7 @@ module.exports = {
                     res.render('user/checkout',{user, items, total});
                 }
                 else{
-                    console.log('No checkout');
+                    res.redirect('/userCart')
                 }
             }
             catch(error){
@@ -49,7 +49,6 @@ module.exports = {
     },
 
     cancelOrder: (req, res) => {
-        console.log('TEST CANCEL ORDER');
         cancelorder(req.params.id).then(response=> {
             if(response.status){
                 res.json({ status: true, message: response.message });

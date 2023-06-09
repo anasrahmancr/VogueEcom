@@ -63,7 +63,6 @@ module.exports = {
   },
   editproduct: (data, prodId) => {
     return new Promise(async (resolve, reject) => {
-      console.log(data, 'this is the data passed', prodId,"this is the prod ID passed");
       try{
         const products = await product.findOne({ _id: new Object(prodId) });
         if(!products){
@@ -79,7 +78,6 @@ module.exports = {
             category: data.mycategory,       
             productImages: data.images,
           })
-          console.log(updateProducts,"updated products U U P P P U U U P P P");
           resolve({status: true})
         }
       } catch(error){
@@ -137,13 +135,10 @@ module.exports = {
 
   deleteProducts: (data) => {
     return new Promise(async (resolve, reject) => {
-      console.log(data);
       let item = await product.findById(data);
       if (!item) {
         resolve({ status: false });
       } else {
-        // const toDelete = await product.deleteOne({_id: item.prodId});
-        console.log(item, "jjjjjjjjjjjj");
         await product.deleteOne(item);
         resolve({ status: true });
       }
@@ -188,7 +183,6 @@ module.exports = {
     return new Promise(async(resolve, reject)=>{
       try {
        const userCart = await Cart.findOne({user_id: user}).populate('items.prodId').lean();
-       console.log(userCart,"usercartttttttttttt");
        if(userCart){
         const couponData = await coupon.find({Status: true});
         if(couponData){
@@ -215,16 +209,15 @@ module.exports = {
           return;
         }
         
-        for(let i=0; i<cart.items.length; i++){
-          // console.log(item,'test');
-          if (cart.items[i].prodId == prodId) {
-            itemIndex = i;
-          }
-        }
-        if (itemIndex === -1) {
-          reject({ status: false, message: 'Item not found in cart' });
-          return;
-        }
+        // for(let i=0; i<cart.items.length; i++){
+        //   if (cart.items[i].prodId == prodId) {
+        //     itemIndex = i;
+        //   }
+        // }
+        // if (itemIndex === -1) {
+        //   reject({ status: false, message: 'Item not found in cart' });
+        //   return;
+        // }
   
         await Cart.updateOne(
           { user_id: user },
@@ -239,7 +232,6 @@ module.exports = {
     })
     .catch(error => {
       // Handle any unhandled promise rejections here
-      console.error(error);
       throw error;
     });
   }

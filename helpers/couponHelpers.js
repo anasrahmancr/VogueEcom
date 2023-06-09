@@ -3,22 +3,18 @@ module.exports = {
   addcoupons: (data) => {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(data, 'data ');
         const couponCheck = await coupon.findOne({couponCode: data.couponcode});
         if(!couponCheck){
-            console.log('IF', data.couponcode);
         const coupons = new coupon({
           couponCode: data.couponcode,
           couponDiscount: data.coupondiscount,
           couponMinAmount: data.couponminamount,
           expireDate: data.expiredate, 
           Status: data.status,  
-        });
-        console.log(coupons,'adddddcpppn'); 
+        }); 
         coupons.save(); 
         resolve({ status: true }); 
       } else{
-        console.log('else');
         resolve({status: false, message: 'code already exists'})
       }
         }
@@ -40,7 +36,6 @@ module.exports = {
         res.status(500).send('An error occurred');
       }
         // const showcoupon = await coupon.find();
-        // console.log('check show coupon',showcoupon);
         // if(!showcoupon){
         //     resolve({status: false, message: 'Cant find the coupon collection'})
         // } else{
@@ -61,7 +56,6 @@ module.exports = {
   },
 
   updatecoupon: (data, body) => {
-    console.log(body,"thsi is bodyyyyyyyyyyyyyyyy");
     return new Promise(async(resolve, reject) => {
       try{
         const updateCoupon = await coupon.findOneAndUpdate({_id: data},

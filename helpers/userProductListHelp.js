@@ -11,7 +11,6 @@ module.exports = {
     // Find all the products that belong to the "Women" category
     Product.find({ category: category._id })
       .then(products => {
-        console.log(products);
         resolve(products) // Display the products that belong to the "Women" category
       })
       .catch(err => console.error(err));

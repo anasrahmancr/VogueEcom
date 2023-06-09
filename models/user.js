@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
     userAddress: {type:Array},
     userWishlist: {type:Array},
     userOrders: {type:Array},
-    isBlocked: {type:Boolean}
+    isBlocked: {type:Boolean},
+    isApproved: {type: Boolean}
   
 })
 

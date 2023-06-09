@@ -6,7 +6,7 @@
                   <div class="header-info">
                       <ul>
                           <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                          <li><i class="fi-rs-marker"></i><a  href="page-contact.html">Our location</a></li>
+                          <li><i class="fi-rs-marker"></i><a  href="#">Our location</a></li>
                           
                       </ul>
                   </div>
@@ -17,7 +17,7 @@
                           <ul>
                               
                               <li>Supper Value Deals - Save more with coupons</li>
-                              <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right.html">shop now</a></li>
+                              <li>Trendy 25silver jewelry, save up 35% off today <a href="/shop">shop now</a></li>
                           </ul>
                       </div>
                   </div>
@@ -59,18 +59,31 @@
                   </div>
                   <div class="header-action-right">
                       <div class="header-action-2">
+                        <% if (user) { %>
+                            <div class="header-action-icon-2">
+                                <a href="/wishlist">
+                                  <img class="svgInject" alt="Evara" src="/user/assets/imgs/theme/icons/icon-heart.svg">
+                                    <span class="pro-count blue" id="wishlistCount"></span>
+                                </a>
+                            </div>
+                            <div class="header-action-icon-2">
+                                <a class="mini-cart-icon" href="/userCart">
+                                  <img alt="Vogue" src="/user/assets/imgs/theme/icons/icon-cart.svg">
+                                    <span class="pro-count blue" id="cartCount"><%=user._id %></span>
+                                </a>
+                            </div>
+                        <% } else {%>
                           <div class="header-action-icon-2">
-                              <a href="/wishlist">
+                              <a href="/login">
                                 <img class="svgInject" alt="Evara" src="/user/assets/imgs/theme/icons/icon-heart.svg">
-                                  <span class="pro-count blue">4</span>
                               </a>
                           </div>
                           <div class="header-action-icon-2">
-                              <a class="mini-cart-icon" href="/userCart">
+                              <a class="mini-cart-icon" href="/login">
                                 <img alt="Vogue" src="/user/assets/imgs/theme/icons/icon-cart.svg">
-                                  <span class="pro-count blue">2</span>
                               </a>
                           </div>
+                          <% } %>
                       </div>
                   </div>
               </div>
@@ -235,9 +248,9 @@
                               <li><a href="shop-fullwidth.html">Sop - Wide</a></li>
                               <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Single Product</a>
                                   <ul class="dropdown">
-                                      <li><a href="shop-product-right.htm">Product – Right Sidebar</a></li>
-                                      <li><a href="shop-product-left.html>Product – Left Sidebar</a></li>
-                                      <li><a href="shop-product-full.html>Product – No sidebar</a></li>
+                                      <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
+                                      <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
+                                      <li><a href="shop-product-full.html">Product – No sidebar</a></li>
                                   </ul>
                               </li>
                               <li><a href="shop-filter.html">Shop– Filter</a></li>
@@ -302,14 +315,6 @@
                               <li><a href="page-404.html">404 Page</a></li>
                           </ul>
                       </li>
-                      <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
-                          <ul class="dropdown">
-                              <li><a href="#">English</a></li>
-                              <li><a href="#">French</a></li>
-                              <li><a href="#">German</a></li>
-                              <li><a href="#">Spanish</a></li>
-                          </ul>
-                      </li>
                   </ul>
               </nav>
               <!-- mobile menu end -->
@@ -319,7 +324,15 @@
                   <a  href="page-contact.html"> Our location </a>
               </div>
               <div class="single-mobile-header-info">
-                  <a href="page-login-register.html">Log In / Sign Up </a>
+                  <!-- <a href="page-login-register.html">Log In / Sign Up </a> -->
+
+                  <% if (user) { %>
+                    <a href="/logout">Hi <%=user.userName %> |  Logout</a>
+                
+                <% } else { %>
+                    <a href="/login">Log In</a>&nbsp;&nbsp;<span>  </span> &nbsp;&nbsp; <a href="/signup">Register </a>&nbsp;&nbsp;
+                    <%} %>
+
               </div>
               <div class="single-mobile-header-info">
                   <a href="#">(+01) - 2345 - 6789 </a>
@@ -336,3 +349,32 @@
       </div>
   </div>
 </div>
+
+<script>
+    window.onload = function(){
+    const userid = document.getElementById("cartCount").innerHTML;
+    console.log(userid,"cartuserid");
+  fetch(`/headerCartCount/${userid}`)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('cartCount').textContent = data.count;
+      console.log(document.getElementById("cartCount").innerHTML,"cart after change");
+    })
+    .catch(error => {
+      console.error(error);
+    });
+    // const userid = document.getElementById("wishlistCount").innerHTML;
+    
+  fetch(`/headerWishlistCount/${userid}`)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('wishlistCount').textContent = data.count;
+      console.log(document.getElementById("wishlistCount").innerHTML,"wislist after change");
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+</script>
+
+  

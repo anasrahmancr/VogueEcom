@@ -2,13 +2,18 @@ const userHelpers = require("../../helpers/userHelpers");
 const {checkBlocked} = require('../../util/middleware')
 
 exports.userLogin = (req, res) => {
-  if (req.session.userLoggedIn) {
-    res.redirect("/");
-  } else {
-    const errorMessage = req.session.errorMessage;
-    req.session.errorMessage = null;
-    res.render("user/login",{errorMessage});
+  try{
+    if (req.session.userLoggedIn) {
+      res.redirect("/");
+    } else {
+      const errorMessage = req.session.errorMessage;
+      req.session.errorMessage = null;
+      res.render("user/login",{errorMessage});
+    }
+  } catch(error){
+    
   }
+  
 }; 
 
 exports.userLoginData = (req, res) => {
@@ -25,7 +30,6 @@ exports.userLoginData = (req, res) => {
           res.redirect('/');
         } else {
           const errorMessage = response.errorMessage;
-          console.log(errorMessage,"ERRRRor MESSSage");
           res.render("user/login", { errorMessage });
         }
       }
@@ -41,16 +45,21 @@ exports.userLogout = (req, res) => {
 };
 
 exports.userSignup = (req, res) => {
-  if (req.session.userLoggedIn) {
-    res.redirect("/");
-  } else {
-    const errorMessage = req.session.message;
-    req.session.message = null; 
-    res.render("user/signup", { errorMessage });
+  try{
+    if (req.session.userLoggedIn) {
+      res.redirect("/");
+    } else {
+      const errorMessage = req.session.message;
+      req.session.message = null; 
+      res.render("user/signup", { errorMessage });
+    }
+  } catch(error){
+
   }
 };
 
 exports.userSignupData = (req, res) => {
+  try{
   if (req.session.userLoggedIn) {
     req.redirect("/");
   } else {
@@ -61,10 +70,14 @@ exports.userSignupData = (req, res) => {
           const errorMessage = response.message;
           res.render('user/signup',{errorMessage});
         } else {
-          res.redirect("/");
-        }
+          res.redirect("/otpverify");
+        } 
       });
   }
+  } catch(error){
+    console.log(error.message);
+  }
+  
 };
 
 exports.otpVerification = (req, res) => {
@@ -72,24 +85,21 @@ exports.otpVerification = (req, res) => {
 };
 
 exports.otpData = (req, res) => {
-  if (req.session.userLoggedIn) {
-    res.redirect("/");
-  } else {
-    const userNumber = req.session.phone;
-    
-    /*  let otp1 = req.body.digit1;
-      let otp2 = req.body.digit2;
-      let otp3 = req.body.digit3;
-      let otp4 = req.body.digit4;
-      const otpCode = otp1 + otp2 + otp3 + otp4; */
-    userHelpers.otpVerify(userNumber, req.body.otp_pin).then((response) => {
-      if (response.status) {
-        req.session.userLoggedIn = true;
-        req.session.user = response.userData;
-        res.redirect("/login");
-      } else {
-        res.redirect("/otpverify");
-      }
-    });
+  try{
+    if (req.session.userLoggedIn) {
+      res.redirect("/");
+    } else {
+      const userNumber = req.session.phone;
+      userHelpers.otpVerify(userNumber, req.body.otp_pin).then((response) => {
+        if (response.status) {
+          res.redirect("/login");
+        } else {
+          res.redirect("/otpverify");
+        }
+      });
+    }
+  } catch(error){
+
   }
+  
 };

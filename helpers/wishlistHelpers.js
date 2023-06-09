@@ -9,7 +9,6 @@ module.exports = {
           try {
             const wishList = await wishlist.findOne({ userId: userId }).populate()
             if (wishList) {
-                console.log(wishList.items.prodId, " wishlist ietms.prodId", prodId,'new objdiddd', wishList,'wishliiiisttt');
                 const result = wishList.items.findIndex((item) => item.prodId == prodId);
               if (result !== -1) {
                 resolve({ status: true, message: 'Product Already in the Cart' });
@@ -60,18 +59,12 @@ module.exports = {
                 return;
             }
             const result = Wishlist.items.findIndex((item) => item.prodId == prodId);
-            // console.log(result,"result");
-            // console.log(Wishlist.items[result]);
             if(result !== -1){
-            //    const reslt = await wishlist.deleteOne({userId: userId},{items: Wishlist.items[result] });;
-            //    console.log(reslt, 'deleted ');
                await wishlist.updateOne(
                 { userId: userId },
                 { $pull: { items: { prodId: prodId } } }
               );
               const wish = await wishlist.find({userId: userId}).populate('items.prodId').lean();
-              console.log(wish,"wishwhshshhshs");
-                
                 resolve({wish: wish, status: true, message: 'Item removed successfully from Wishlist'})
             }
             

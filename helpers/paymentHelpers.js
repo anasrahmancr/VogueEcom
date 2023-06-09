@@ -17,7 +17,6 @@ module.exports = {
                 receipt: "" + receiptId
             };
         instance.orders.create(options, function(err, order){
-            console.log(order,"ORDER 3333333 INSIDE GENERATE RZOR PAY");
             resolve(order)
             })
             // resolve({status: true, totalPrice: totalPrice, receiptId: receiptId, order: order})

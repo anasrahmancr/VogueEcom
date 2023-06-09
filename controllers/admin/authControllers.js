@@ -5,7 +5,6 @@ module.exports = {
   adminLogin: (req, res) => {
     const errorMessage = req.session.adminerrorMessage;
     req.session.adminerrorMessage = null;
-    console.log(errorMessage,"errror meessagge");
     res.render("admin/login",{errorMessage});
   },
 

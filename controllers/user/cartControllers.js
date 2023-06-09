@@ -4,11 +4,7 @@ const {changeproQuantity, addCartTotal, getactivecoupon} = require('../../helper
 module.exports = {
     cartData: (req,res) => {
         getCart(req.session.user._id).then((response) =>{
-            console.log(response,"respooooooooooonseeeeeeeee");
-            console.log(response.userCart,"usercart");
-            console.log(response.couponData,"coupon");
             if(response.status){
-                console.log("check if");
                 const cartItems = response.userCart;
                 const userId = req.session.user._id;
                 const couponData = response.couponData;
