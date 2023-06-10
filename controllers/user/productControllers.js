@@ -1,6 +1,5 @@
-const { shopProducts, testshop} = require("../../helpers/userProductListHelp");
+const { filterProducts, shopProducts, testshop} = require("../../helpers/userProductListHelp");
 const { findProductdetails} = require("../../helpers/productHelpers");
-const { response } = require("express");
 
 module.exports = {
     womens: (req,res) => {
@@ -15,32 +14,22 @@ module.exports = {
 
     },
     shopView: (req,res) => {
-        const itemsPerPage = 9;
-        const currentPage = parseInt(req.query.page) || 1;
-        shopProducts(itemsPerPage, currentPage).then(response => {
-            res.render('user/shop',{currentPage: response.currentPage, products: response.products, totalPages: response.totalPages, totalProducts: response.totalProducts})
-        })
+        let query = {}
+        if (req.session.query) {
+            query = req.session.query
+            console.log(query,"inside fif query");
+        } else{
+            query = req.query.sort; 
+        }
+        const page =  req.query.page ? req.query.page : 1;
+        console.log(query, page,"fil, page");
+        req.session.query = query;
+        filterProducts(query).then(data => {
+            shopProducts(data, page).then(response => {
+                res.render('user/shop',{currentPage: response.currentPage, products: response.products, totalPages: response.totalPages, totalProducts: response.totalProducts})
+            })
+        })  
     },
-
-//     shopView: (req, res) => {
-//         const itemsPerPage = 9;
-//         const currentPage = parseInt(req.query.page) || 1;
-//         const sortOption = req.query.sort || 'featured'; // Get the selected sort option from query parameter
-        
-//         shopProducts(itemsPerPage, currentPage, sortOption)
-//           .then(response => {
-//             res.render('user/shop', {
-//               currentPage: response.currentPage,
-//               products: response.products,
-//               totalPages: response.totalPages,
-//               totalProducts: response.totalProducts,
-//               sort: sortOption // Pass the sort option to the view
-//             });
-//           })
-//           .catch(error => {
-//             res.status(500).send('An error occurred');
-//           });
-// },
 
     productDetails: (req,res) => {
         const prodId = req.params.id;

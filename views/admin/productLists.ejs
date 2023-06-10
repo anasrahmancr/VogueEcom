@@ -29,20 +29,20 @@
                                 <img src="/productImages/<%= product.productImages[0] %>" class="img-sm img-thumbnail" alt="Item">
                             </div>
                             <div class="info">
-                                <h6 class="mb-0 tooltipEll"><%= product.productName %></h6>
+                                <h6 class="mb-0" style="width: 100px;"><%= product.productName %></h6>
                             </div>
                             <div class="info">
                                 <h6 class="mb-0 tooltipEll"><%= product.productDescription %></h6>
                             </div>
                             <div class="info">
-                                <h6 class="mb-0 tooltipEll"><%= product.brands %></h6>
+                                <h6 class="mb-0 "><%= product.brands %></h6>
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span>₹ <%= product.productPrice %></span> </div>
-                    <div class="col-lg-2 col-sm-2 col-4 col-price"> <span>₹ <%= product.productSalePrice %></span> </div>
+                    <div class="col-lg-1 col-sm-2 col-3 col-price"> <span>₹ <%= product.productPrice %></span> </div>
+                    <div class="col-lg-1 col-sm-2 col-3 col-price"> <span>₹ <%= product.productSalePrice %></span> </div>
                     
-                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+                    <div class="col-lg-4 col-sm-2 col-3 col-action text-end">
                         <a href="/admin/editProducts/<%=product._id %>" class="btn btn-sm font-sm rounded btn-brand">
                             <i class="material-icons md-edit"></i> Edit
                         </a>

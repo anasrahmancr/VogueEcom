@@ -27,10 +27,10 @@
                                 </div>
                                 <div class="sort-by-dropdown">
                                     <ul>
-                                        <li><a class="active" href="#">Featured</a></li>
-                                        <li><a href="#">Price: Low to High</a></li>
-                                        <li><a href="#">Price: High to Low</a></li>
-                                        <li><a href="#">Release Date</a></li>
+                                        <li><a class="active" href="/shop">featured</a></li>
+                                        <li><a href="?sort=lowToHigh">Price: Low to High</a></li>
+                                        <li><a href="?sort=highToLow">Price: High to Low</a></li>
+                                        <li><a href="?sort=releaseDate">Release Date</a></li>
                                         <!-- <li><a href="#">Avg. Rating</a></li> -->
                                     </ul>
                                 </div>
@@ -131,19 +131,16 @@
 <script>
     
     function addtowishlist(event, productId) {
-        console.log('test');
   event.preventDefault(); // Prevent the default behavior of the link
   
   fetch(`/addToWishlist/${productId}`, {
-    method: 'POST', // You can change the HTTP method as needed
+    method: 'POST', 
     headers: {
       'Content-Type': 'application/json'
     },
-    // You can include additional request parameters or data here
   })
     .then(response => response.json())
     .then(data => {
-        console.log(data,"dddd")
         Toastify({
             text: data.message,
             duration: 1000,
@@ -166,3 +163,58 @@
     });
 }
 </script>
+
+<!-- <script>
+
+const filterSelect = document.getElementById('filterSelect');
+const pageSelect = document.querySelectorAll('.page-link');
+
+console.log(pageSelect,"pageSelect");
+console.log(filterSelect,"filterSelect");
+
+filterSelect.addEventListener('change', handleFilterChange);
+function handleFilterChange(event) {
+//   const searchQuery = searchInput.value;
+  const filterOption = event.target.value;
+  const pageOption = pageSelect.value;
+  console.log(filterOption,"filterOption");
+  const url = `/shop?filter=${filterOption}&page=1`;
+    console.log(url,"url");
+  fetch(url)
+    // .then(response => response.json())
+    // .then(data => {
+    //   console.log(data, "resp, d");
+    // })
+    // .catch(error => {
+    //   Handle errors
+    // });
+    .then(response => {
+        console.log("check", response);
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Handle the response data
+        console.log(data);
+        
+        // Use the data to update the UI or perform any other operations
+        // Modify this according to your requirements
+        document.querySelector('.currentPage').textContent = data.currentPage;
+        document.querySelector('.totalPages').textContent = data.totalPages;
+        // Process and render the products data however you want
+        // ...
+
+        // Show/hide elements, update UI, etc.
+        // ...
+    })
+    .catch(error => {
+        // Handle the error
+        console.error(error);  // Log the error for debugging
+        // Show error message or take appropriate action
+        // ...
+ 
+}
+
+</script> -->
