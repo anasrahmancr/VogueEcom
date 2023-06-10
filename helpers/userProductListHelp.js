@@ -121,7 +121,7 @@ module.exports = {
   homePageProducts: ()=> {
     return new Promise(async(resolve, reject) => {
       try{
-        const items = await Product.find({}).limit(8).lean();
+        const items = await Product.find().limit(8).lean();
         console.log(items,"itemss");
         resolve(items);
       } catch(error){
