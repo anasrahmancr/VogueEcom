@@ -1,4 +1,4 @@
-const {getOrderList} = require('../../helpers/adminSideOrderHelper')
+const {getOrderList, viewDetailsOrder} = require('../../helpers/adminSideOrderHelper')
 
 module.exports = {
     orderManagement: (req,res) => {
@@ -11,6 +11,17 @@ module.exports = {
                 console.log("Some Error Occured");
             }
         })
+        
+    },
+
+    viewOrderDetails: (req, res) => {
+        try{
+            viewDetailsOrder(req.params.id).then(orderDetails => {
+                res.render('admin/viewOrders',{orderDetails})
+            })
+        } catch(error){
+            console.log(error.message);
+        }
         
     },
  

@@ -1,4 +1,4 @@
-const { myorders, userAccount } = require("../../helpers/userHelpers");
+const { myorders, userDetails } = require("../../helpers/userHelpers");
 
 module.exports = {
   myOrders: (req, res) => {
@@ -15,7 +15,18 @@ module.exports = {
   },
 
   userAccount: (req, res) => {
-    userAccount(req.session.user._id).then((response) => {});
     res.render("user/userAccount");
   },
+
+  userAccountDetails:(req, res) => {
+    try{
+      console.log('tssttt');
+      console.log(req.session.user._id,"idddddddddddddddddd");
+    userDetails(req.session.user._id).then(response => {
+        res.render('user/userAccDetails')
+    })
+      } catch(error){
+        console.log(error.message);
+      }
+    }
 };

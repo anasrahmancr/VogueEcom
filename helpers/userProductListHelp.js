@@ -122,7 +122,6 @@ module.exports = {
     return new Promise(async(resolve, reject) => {
       try{
         const items = await Product.find().limit(8).lean();
-        console.log(items,"itemss");
         resolve(items);
       } catch(error){
         console.log(error.message);

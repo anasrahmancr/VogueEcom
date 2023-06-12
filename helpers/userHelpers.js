@@ -223,18 +223,14 @@ module.exports = {
     });
   },
 
-  userAccount: (userId) => {
-    return new Promise(async (resolve, reject) => {
-      // try{
-      //     const userDetails = await user.find({_id: userId});
-      // if(!userDetails){
-      //     resolve({status: false, message: 'No datas found'})
-      // } else{
-      //     resolve({status: true, userDetails: userDetails})
-      // }
-      // } catch(error){
-      //     console.log(error);
-      // }
-    });
-  },
+  userDetails:(userId) =>{
+    return new Promise(async(resolve, reject) => {
+      try{
+        const user = await user.find({_id: userId})
+        resolve(user)
+      } catch(error){
+        console.log(error);
+      }
+    })
+  }
 };

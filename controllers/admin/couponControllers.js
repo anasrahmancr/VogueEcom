@@ -3,16 +3,25 @@ const {addcoupons, showcoupons, editcoupon, updatecoupon, deletecoupon} = requir
 module.exports = {
     // get addCoupon Page
     addcoupon: (req, res) => { 
-        res.render('admin/addCoupon');
+       req.session.errorMessage = null;
+       const errorMessage = req.session.errorMessage;
+       res.render('admin/addCoupon',{errorMessage: errorMessage});
     },
 
     // post addCoupon Data
     addCoupons: (req, res) => {
-      addcoupons(req.body).then(response => {
-        if(response.status){
-            res.redirect('/admin/showCoupons')
+        try{
+            addcoupons(req.body).then(response => {
+                if(response.status){
+                    res.redirect('/admin/showCoupons')
+                } else{
+                    res.render('admin/addCoupon', {errorMessage: response.message})
+                }
+              })
+        } catch(error){
+            
         }
-      })
+      
     },
 
     showCoupons:(req, res) => {

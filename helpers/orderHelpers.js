@@ -26,7 +26,8 @@ module.exports = {
   orderPlace: (data, user) => {
     return new Promise(async (resolve, reject) => {
       try {
-        let items = await Cart.findOne({ user_id: user }).populate();
+        let items = await Cart.findOne({ user_id: user }).populate('items.prodId');
+        console.log(items.items,"itsmes s ");
         const total = items.Total;
         if (!items) {
           resolve({ status: false, message: "Cart not found" });
@@ -44,7 +45,7 @@ module.exports = {
                 phone: data.phone,
               },
               paymentMethod: data.payment_option,
-              products: { products: items },
+              products: items.items,
               totalAmount: total,
               shipping_status: "Order Placed",
               date: new Date(),
@@ -66,7 +67,7 @@ module.exports = {
                 phone: data.phone,
               },
               paymentMethod: paymentmethod,
-              products: { products: items },
+              products: items.items,
               totalAmount: total,
               shipping_status: "Pending",
               date: new Date(),
@@ -74,8 +75,6 @@ module.exports = {
             order.save();
             generateRazorpay(order, total).then((response) => {
               resolve(response);
-              // resolve({status: response.status, paymentOption: data.payment_option,
-              // totalPrice: response.totalPrice, receiptId: response.receiptId, order: response.order})
             });
           } else {
           }

@@ -3,6 +3,8 @@ module.exports = {
   addcoupons: (data) => {
     return new Promise(async (resolve, reject) => {
       try {
+        const couponName = data.couponcode; 
+        data.couponcode = couponName.toUpperCase(); // Change couponCode to Upper Case
         const couponCheck = await coupon.findOne({couponCode: data.couponcode});
         if(!couponCheck){
         const coupons = new coupon({
@@ -15,7 +17,7 @@ module.exports = {
         coupons.save(); 
         resolve({ status: true }); 
       } else{
-        resolve({status: false, message: 'code already exists'})
+        resolve({status: false, message: 'Coupon Name already exists'})
       }
         }
          catch (error) {

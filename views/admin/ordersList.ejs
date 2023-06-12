@@ -14,9 +14,11 @@
             <th class="align-middle" scope="col">Billing Name</th>
             <th class="align-middle" scope="col">Date</th>
             <th class="align-middle" scope="col">Total</th>
-            <th class="align-middle" scope="col">Shipping Status</th>
+            <th class="align-middle" scope="col">Order Status</th>
             <th class="align-middle" scope="col">Payment Method</th>
-            <!-- <th class="align-middle" scope="col">View Details</th> -->
+            <th class="align-middle" scope="col">View Details</th>
+            <th class="align-middle" scope="col">Action</th>
+
           </tr>
         </thead>
         <tbody>
@@ -33,20 +35,32 @@
               <%= order.deliveryAddress[0].fname %> <%=
               order.deliveryAddress[0].lname%>
             </td>
-            <td><%=order.date %></td>
-            <td><%=order.totalAmount %></td>
+            <td><%=order.date.toISOString().split('T')[0]%></td>
+            <td>&#8377;<%=order.totalAmount %></td>
             <td>
-              <span class="badge badge-pill badge-soft-success"
-                ><%=order.shipping_status %></span
-              >
+              <% if (order.shipping_status === 'Order Placed') { %>
+                <span class="badge badge-pill badge-soft-success"><%= order.shipping_status %></span>
+                <% } else if (order.shipping_status === 'Cancelled'){ %>
+                  <span class="badge badge-pill badge-soft-danger"><%= order.shipping_status %></span>
+              <% } else if (order.shipping_status === 'Pending'){ %>
+                <span class="badge badge-pill badge-soft-secondary"><%= order.shipping_status %></span>
+                <% } else { %>
+                  <span class="badge badge-pill badge-soft-warning"><%= order.shipping_status %></span>
+                  <% } %>
             </td>
-            <td><%=order.paymentMethod %></td>
+
+            <td><% if (order.paymentMethod === 'onlinepayment') { %>
+              Online
+            <% } else { %>
+              COD
+            <% } %></td>
+              <td><a class="btn btn-primary" href="/admin/viewOrderDetails/<%=order._id %>" class="btn btn-primary">View Details</a></td>
             <td>
               <!-- Example single danger button -->
               <div class="btn-group">
                 <button
                   type="button"
-                  class="btn btn-danger dropdown-toggle"
+                  class="btn btn-secondary btn-sm dropdown-toggle"
                   data-bs-toggle="dropdown"
                   aria-expanded="false">Change Status
                 </button>
@@ -54,22 +68,11 @@
                   <li><a class="dropdown-item" href= "/admin/status-orderShipped/<%=order._id %>">Order Shipped</a></li>
                   <li><a class="dropdown-item" href= "/admin/status-orderDelivered/<%=order._id %>" >Delivery</a></li>
                   <li><a class="dropdown-item" href= "/admin/status-deliveryConfirmtion/<%=order._id %>">Delivery Confirmation</a></li>
-                  <li><hr class="dropdown-divider" /></li>
+                  <!-- <li><hr class="dropdown-divider" /></li> -->
                   <li><a class="dropdown-item" href= "/admin/status-returnOrder/<%=order._id %>">Return order</a></li>
                   <li><a class="dropdown-item" href= "/admin/status-exchangeOrder/<%=order._id %>">Exchange order</a></li>
                 </ul>
               </div>
-              <!-- <div class="dropdown">
-                              <button class="btn btn-xs dropdown-toggle" type="button" id="orderStatusDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Change Status
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="orderStatusDropdown">
-                                <a class="dropdown-item" href="#">Order Shipped</a>
-                                <a class="dropdown-item" href="#">Delivery</a>
-                                <a class="dropdown-item" href="#">Delivery Confirmation</a>
-                                <a class="dropdown-item" href="#">Return or Exchange</a>
-                              </div>
-                            </div> -->
             </td>
           </tr>
           <% }) %>

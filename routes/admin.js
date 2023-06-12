@@ -4,7 +4,7 @@ const upload = require('../config/multer')
 const {dashboard} = require('../controllers/admin/homeControllers')
 const {productManagement, addProducts, addProductData, editProducts, editProductData, category, addCategory, deleteProduct} = require('../controllers/admin/productControllers')
 const {userManagement, blockUser, unBlockUser, editUser} = require('../controllers/admin/userControllers')
-const {orderManagement, changeOrderStatus} = require('../controllers/admin/orderControllers')
+const {orderManagement, changeOrderStatus, viewOrderDetails} = require('../controllers/admin/orderControllers')
 const {addCoupons, showCoupons, addcoupon, editCoupon, updatedCoupon, deleteCoupon} = require('../controllers/admin/couponControllers')
 const {addBanner, listBanner, addBannerData, editBanner, updateBanner, deleteBanner} = require('../controllers/admin/bannerControllers')
 const {salesreport} = require('../controllers/admin/salesControllers')
@@ -44,6 +44,7 @@ router.post('/unBlockUser/:id', unBlockUser)
 // Order Management
 router.get('/orderManagement',adminTrue, orderManagement)
 router.post('/changeOrderStatus', adminTrue, changeOrderStatus )
+router.get('/viewOrderDetails/:id', adminTrue, viewOrderDetails)
 
 //Banner Management
 router.get('/addBanners',adminTrue, addBanner)

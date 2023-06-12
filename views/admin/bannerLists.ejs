@@ -1,3 +1,21 @@
+<style>
+  .overflow{
+    white-space: nowrap;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .overflow:hover{
+    white-space: normal;
+  }
+
+  @media (max-width: 800px) {
+  .itemside  {
+    flex-direction: column;
+  }
+}
+</style>
+
 <section class="content-main">
   <div class="content-header">
     <div>
@@ -22,7 +40,7 @@
       <% getbanner.forEach(banner => { %>
       <article class="itemlist" id="banner_<%= banner._id %>">
         <div class="row align-items-center">
-          <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
+          <div class="col-lg-3 col-sm-4 col-8 flex-grow-1 col-name">
             <a class="itemside" href="#">
               <div class="left">
                 <img
@@ -31,23 +49,23 @@
                   alt="Item"
                 />
               </div>
-              <div class="info">
-                <h6 class="mb-0"><%= banner.Title %></h6>
+              <div class="info" style="width: 200px;">
+                <h6 class="mb-0  overflow" style="width: 200px;"><%= banner.Title %></h6>
               </div>
             </a>
           </div>
-          <div class="col-lg-2 col-sm-2 col-4 col-price">
+          <div class="col-lg-2 col-sm-2 col-4 col-price overflow">
             <span><%= banner.Message %></span>
           </div>
-          <div class="col-lg-2 col-sm-2 col-4 col-status">
+          <div class="col-lg-1 col-sm-2 col-4 col-status">
             <span class="badge rounded-pill alert-success"
               ><%= banner.Status %></span
             >
           </div>
-          <div class="col-lg-1 col-sm-2 col-4 col-date">
+          <div class="col-lg-2 col-sm-2 col-4 col-date overflow">
             <span><%= banner.Description%></span>
           </div>
-          <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+          <div class="col-lg-3 col-sm-2 col-4 col-action text-end">
             <a
               href="/admin/editBanner/<%=banner._id %>"
               class="btn btn-sm font-sm rounded btn-brand"

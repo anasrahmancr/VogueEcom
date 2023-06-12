@@ -1,6 +1,6 @@
 <div class="card-body">
     <div class="table-responsive">
-        <table id="salesTable" class="display">
+        <table id="salesTable" class="display pt-3">
             <thead>
               <tr>
                 <th>Order Receipt</th>
@@ -22,14 +22,17 @@
                     order.deliveryAddress[0].city%> <%=
                     order.deliveryAddress[0].zipcode%>
                   </td>
-                  <td><%= order.date %></td>
-                  <td><%= order.totalAmount %></td>
+                  <td><%= order.date.toISOString().split('T')[0] %></td>
+                  <td>&#8377;<%= order.totalAmount %></td>
                   <td>
                     <span class="badge badge-pill badge-soft-success"
-                      ><%= order.shipping_status %></span
-                    >
+                      ><%= order.shipping_status %></span>
                   </td>
-                  <td><%= order.paymentMethod %></td>
+                  <td><% if (order.paymentMethod === 'onlinepayment') { %>
+                    Online
+                  <% } else { %>
+                    COD
+                  <% } %></td>
                 </tr>
                 <% }) %>
               </tbody>

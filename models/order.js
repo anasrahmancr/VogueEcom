@@ -7,7 +7,12 @@ const orderSchema = new mongoose.Schema({
         ref: 'user'},
     deliveryAddress: Array,
     paymentMethod: String,
-    products: Array,
+    products: [{
+        prodId : {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'product',
+        },quantity: Number
+        }],
     totalAmount: Number,
     payment_details: Object,
     shipping_status: String,

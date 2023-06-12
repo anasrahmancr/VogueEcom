@@ -1,3 +1,10 @@
+<style>
+    @media (max-width: 800px) {
+  .itemside  {
+    flex-direction: column;
+  }
+}
+</style>
 
 <section class="content-main">
     <div class="content-header">
@@ -22,33 +29,31 @@
             <% products.forEach(product => { %>         
             <article class="itemlist">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
-                        <a class="itemside" href="#">
-                            <div class="left">
-
+                    <div class=" flex-grow-1 col-name">
+                        <div class="itemside">
+                            <div class="left col-lg-1 col-sm-4 col-8">
                                 <img src="/productImages/<%= product.productImages[0] %>" class="img-sm img-thumbnail" alt="Item">
                             </div>
-                            <div class="info">
-                                <h6 class="mb-0" style="width: 100px;"><%= product.productName %></h6>
+                            <div class="info col-lg-2 col-sm-4 col-8">
+                                <h6 class="mb-0"><%= product.productName %></h6>
                             </div>
-                            <div class="info">
+                            <div class="info col-lg-3 col-sm-4 col-8">
                                 <h6 class="mb-0 tooltipEll"><%= product.productDescription %></h6>
                             </div>
-                            <div class="info">
-                                <h6 class="mb-0 "><%= product.brands %></h6>
+                            <div class="info col-lg-2 col-sm-4 col-8">
+                                <h6 class="mb-0 tooltipEll"><%= product.brands %></h6>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-1 col-sm-2 col-3 col-price"> <span>₹ <%= product.productPrice %></span> </div>
-                    <div class="col-lg-1 col-sm-2 col-3 col-price"> <span>₹ <%= product.productSalePrice %></span> </div>
-                    
-                    <div class="col-lg-4 col-sm-2 col-3 col-action text-end">
-                        <a href="/admin/editProducts/<%=product._id %>" class="btn btn-sm font-sm rounded btn-brand">
-                            <i class="material-icons md-edit"></i> Edit
-                        </a>
-                        <a onclick="deleteProduct('<%=product._id%>')" class="btn btn-sm font-sm btn-light rounded">
-                            <i class="material-icons md-delete_forever"></i> Delete
-                        </a>
+                            <div class="col-price col-lg-1 col-sm-4 col-8"> <span>₹ <%= product.productPrice %></span> </div>
+                            <div class="col-price col-lg-1 col-sm-4 col-8"> <span>₹ <%= product.productSalePrice %></span> </div>
+                            <div class="col-lg-3 col-sm-4 col-8 ">
+                                <a href="/admin/editProducts/<%=product._id %>" class="btn btn-sm font-sm rounded btn-brand">
+                                    <i class="material-icons md-edit"></i> Edit
+                                </a>
+                                <a onclick="deleteProduct('<%=product._id%>')" class="btn btn-sm font-sm btn-light rounded">
+                                    <i class="material-icons md-delete_forever"></i> Delete
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div> <!-- row .// -->
             </article> <!-- itemlist  .// -->

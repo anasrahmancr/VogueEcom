@@ -21,5 +21,18 @@ module.exports = {
                 }
             })
         })
-    }
+    }, 
+
+    viewDetailsOrder: (orderId) => {
+        return new Promise(async(resolve, reject) => {
+            try {
+                const orderDetails = await Order.findOne({_id: orderId}).populate('products.prodId');
+                // const productsOrdered = orderDetails.products;
+                console.log(orderDetails,"ordered detaisl product");
+                resolve(orderDetails)
+              } catch (error) {
+                console.log(error.message,"err messsage");
+              }
+        })
+    },
 }

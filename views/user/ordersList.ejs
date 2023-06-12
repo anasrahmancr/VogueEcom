@@ -1,7 +1,7 @@
-<div class="mb-3">
-    <input type="text" id="searchInput" class="form-control" placeholder="Search.  .  .  .  .  .  .">
-    <button id="searchButton" class="btn btn-primary">Search</button>
-  </div>
+<div class="mb-3 p-3">
+  <input type="text" id="searchInput" class="form-control mb-2" placeholder="Search all orders" style="border: 1px solid #888C8C;">
+  <button id="searchButton" class="btn btn-success">Search</button>
+</div>
 <div class="card-body">
     <div class="table-responsive">
         <div class="table-responsive">
@@ -13,29 +13,32 @@
                         <th class="align-middle" scope="col">Billing Name</th>
                         <th class="align-middle" scope="col">Date</th>
                         <th class="align-middle" scope="col">Total</th>
-                        <th class="align-middle" scope="col">Payment Status</th>
+                        <th class="align-middle" scope="col">Order Status</th>
                         <th class="align-middle" scope="col">Payment Method</th>
-                        <th class="align-middle" scope="col">Actions</th>
+                        <th class="align-middle" scope="col">Shipping Status</th>
                         <!-- <th class="align-middle" scope="col">View Details</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <% orders.forEach(order => { %>
                     <tr data-orderId="<%= order._id %>">
-                        <td><a href="#" class="btn-success">View Products</a></td>
+                        <td><a href="#" class="btn">View Products</a></td>
                         <td class="fw-bold"><%=order._id %></td>
                         <td><%= order.deliveryAddress[0].fname %> <%= order.deliveryAddress[0].lname%></td>
                         <td>
-                            <%= order.date %>
+                            <%= order.date.toISOString().split('T')[0] %>
                         </td>
                         <td>
                             <%=order.totalAmount %>
                         </td>
-                        <td>
-                            <%=order.shipping_status %>
+                        <td>&#8377;<%=order.shipping_status %>
                         </td>
                         <td>
-                            <%=order.paymentMethod %>
+                          <% if (order.paymentMethod === 'onlinepayment') { %>
+                            Online
+                          <% } else { %>
+                            COD
+                          <% } %>
                         </td>
                         <td>
                             <% if (order.shipping_status === 'Cancelled') { %>
@@ -43,8 +46,8 @@
                                 <% } else if (order.shipping_status === 'Returned') { %>
                                 Products Returned
                                 <% } else { %>
-                            <a onclick="cancelorder('<%= order._id %>')" class="btn-primary">Cancel</a>
-                            <a onclick="returnproducts('<%= order._id %>')" class="btn-primary">Return</a>
+                                  <a onclick="cancelorder('<%= order._id %>')" class="cancel btn-outline-danger">Cancel</a>
+                                  <a onclick="returnproducts('<%= order._id %>')" class="cancel btn-outline-secondary">Return</a>
                             <% } %>
                           </td>                          
                     </tr>

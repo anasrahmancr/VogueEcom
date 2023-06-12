@@ -7,7 +7,7 @@ const {addWishlist, wishlist, removeFromWishlist} = require('../controllers/user
 const {mens,womens,kids,shopView, productDetails, testShop} = require('../controllers/user/productControllers')
 const {userLogin, userheaderMiddleware, categoriesMiddleware} = require('../util/middleware')
 const {checkout, placeOrder, verifyPayment, codSuccess, cancelOrder, returnProducts, vieworderedProducts} = require('../controllers/user/orderControllers')
-const {myOrders, userAccount} = require('../controllers/user/userControllers');
+const {myOrders, userAccount, userAccountDetails} = require('../controllers/user/userControllers');
 const {headCartCount, headWishlistCount} = require('../controllers/user/userHeaderControllers')
 
 
@@ -29,6 +29,7 @@ router.get('/contact',contact)
 // User Account
 router.get('/userAccount',userLogin, userAccount)
 router.get('/myOrders', userLogin, myOrders)
+router.get('/userAccountDetails', userLogin, userAccountDetails)
 
 
 // Authentication

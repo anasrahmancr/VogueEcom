@@ -6,8 +6,11 @@
             </div>
         </div>
     </div>
+    <% if (errorMessage) { %>
+        <p><span style="color: red; font-size: large;"><%= errorMessage %></span></p>
+       <% } else { %>
+        <% } %>
     <form action="/admin/addCoupon" method="POST">
-        
             <div class="row"> 
                 <div class="col-lg-6">
                     

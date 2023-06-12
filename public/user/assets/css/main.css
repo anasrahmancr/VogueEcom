@@ -919,6 +919,10 @@ button.submit:hover, button[type='submit']:hover {
   font-size: 14px;
 }
 
+.cancel:hover {
+  color: #141432;
+}
+
 .btn, .button {
   display: inline-block;
   border: 1px solid transparent;
@@ -4530,7 +4534,7 @@ table .product-thumbnail img {
 }
 
 .detail-gallery .slick-slider {
-  background-color: #000;
+  background-color: #ffff;
   margin-bottom: 30px;
   border-radius: 10px;
 }

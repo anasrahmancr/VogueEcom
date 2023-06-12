@@ -3,8 +3,9 @@ const {dashboardDatas} = require('../../helpers/dashboardHelpers')
 
 module.exports = {
   adminLogin: (req, res) => {
-    const errorMessage = req.session.adminerrorMessage;
+    const errorMessage = req.session.adminerrorMessage || null;
     req.session.adminerrorMessage = null;
+    console.log(errorMessage,"err message ");
     res.render("admin/login",{errorMessage});
   },
 

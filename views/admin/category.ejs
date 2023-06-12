@@ -1,35 +1,36 @@
-<!-- <!DOCTYPE html>
-<html>-->
+<!DOCTYPE html>
+<html>
   <head>
-    <title>Category Management</title> 
+    <title>Category Management</title>
     <style>
-
-th {
-  background-color: #500089;
-  color: white;
-  font-size: 16px;
-  padding-left: 10px;
-  border-bottom: 2px solid white; 
+      th {
+        background-color: #aa0c14;
+        color: white;
+        font-size: 16px;
+        padding-left: 10px;
+        border-bottom: 2px solid white;
       }
 
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        border-radius: 1em;
+        overflow: hidden;
+      }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-  border-radius: 1em;
-  overflow: hidden;
-}
+      td {
+        padding: 1em;
+        /* background: #ddd; */
+      }
 
- td {
-  padding: 1em;
-  /* background: #ddd; */
-  
-}
+      body {
+        margin: 1.5em;
+      }
 
-body {
-  margin: 1.5em;
-}
-
+      .deletebutton a {
+        color: #aa0c14;
+        font-weight: bolder;
+      }
       label {
         margin-top: 10px;
         font-weight: bold;
@@ -65,91 +66,19 @@ body {
         padding: 20px;
         background-color: #ffff;
       }
-      
-tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
 
-tr:nth-child(even) {
-  background-color: #ffffff;
-}
-      /* * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: sans-serif;
-      }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      h1 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      tr:nth-child(odd) {
         background-color: #f2f2f2;
-        padding: 20px;
-        border-radius: 10px;
       }
-      label {
-        margin-top: 10px;
-        font-weight: bold;
+
+      tr:nth-child(even) {
+        background-color: #ffffff;
       }
-      input[type="text"],
-      select {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        margin-top: 5px;
-        margin-bottom: 10px;
-        font-size: 16px;
-      }
-      button[type="submit"] {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 10px;
-      }
-      button[type="submit"]:hover {
-        background-color: #3e8e41;
-      }
-      table {
-        margin-top: 20px;
-        width: 100%;
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        border: 1px solid black;
-        padding: 10px;
-        text-align: center;
-      }
-      th {
-        background-color: #4caf50;
-        color: white;
-        font-size: 16px;
-      }
-      td a {
-        color: blue;
-        text-decoration: underline;
-      } */
     </style>
   </head>
   <body>
     <div class="container">
-      <h1 style="color: #500089; opacity: 0.7;">Category Management</h1>
+      <h1 style="color: #aa0c14; opacity: 0.7">Category Management</h1>
       <form method="post" action="/admin/addCategory">
         <label for="category-name">Category Name:</label>
         <input type="text" id="category-name" name="categoryname" required />
@@ -160,16 +89,15 @@ tr:nth-child(even) {
       <table>
         <thead>
           <tr>
-            <th style=" padding-left: 10px;">Category Name</th>
-            <th style=" padding-left: 10px;">Action</th>
+            <th style="padding-left: 10px">Category Name</th>
+            <th style="padding-left: 10px">Action</th>
           </tr>
         </thead>
         <tbody>
-          
           <% (categories || []).forEach(category => { %>
           <tr>
             <td><%= category.categoryName %></td>
-            <td><a href="/deleteCategory/<%= category._id %>">Delete</a></td>
+            <td class="deletebutton"><a href="/deleteCategory/<%= category._id %>">DELETE</a></td>
           </tr>
           <% }); %>
         </tbody>

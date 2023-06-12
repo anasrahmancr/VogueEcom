@@ -44,8 +44,33 @@ module.exports = {
     });
   },
 
+  // editProductData: (req, res) => {
+  //   editproduct(req.body, req.params.id).then(response => {
+  //     if(response.status){
+  //       res.redirect('/admin/productManagement')
+  //     } else{
+  //       res.json({message: "error occured"})
+  //     }
+  //   })
+  // },
+
   editProductData: (req, res) => {
-    editproduct(req.body, req.params.id).then(response => {
+    let new_images = [];
+    if(req.files.length > 0){
+      req.files.forEach(files => {
+        new_images.push(files.filename)
+      });
+      try{
+        req.body.old_image.forEach(files => {
+          fs.unlinkSync(`public/productImages/${files}`);
+        });
+      } catch(err){
+        console.log(err);
+      }
+    } else{
+      new_images.push(...req.body.old_image);      
+    }
+    editproduct(new_images, req.body, req.params.id).then(response => {
       if(response.status){
         res.redirect('/admin/productManagement')
       } else{

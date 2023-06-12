@@ -1,4 +1,12 @@
-<table class="table table-hover my-0">
+<style>
+  @media (max-width: 800px) {
+.itemside {
+  flex-direction: column;
+}
+}
+</style>
+<div class="itemside p-3">
+<table class="table table-hover my-0 p-3">
   <thead>
     <tr>
       <th>Name</th>
@@ -27,6 +35,7 @@
             ><button
               type="button"
               class="btn btn-success"
+              style="line-height: 1;"
               id="blockButton<%=user._id %>"
             >UNBLOCK</button></a
           >
@@ -37,6 +46,7 @@
               ><button
                 type="button"
                 class="btn btn-danger"
+                style="line-height: 1;"
                 id="blockButton<%=user._id %>"
               >BLOCK</button></a
             >
@@ -49,6 +59,7 @@
     <% }) %>
   </tbody>
 </table>
+</div>
 <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
   <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-start">

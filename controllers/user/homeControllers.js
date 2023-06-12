@@ -8,7 +8,6 @@ module.exports = {
             if(response.status){
                 const activeBanner = response.activeBanner;
                homePageProducts().then((items)=>{
-                console.log(items,"homePageProducts");
                 res.render('index', {activeBanner: activeBanner, products: items} );
                })
                 

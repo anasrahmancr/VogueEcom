@@ -1,3 +1,11 @@
+<style>
+  @media (max-width: 800px) {
+.itemside {
+  flex-direction: column;
+ }
+}
+</style>
+
 <section class="content-main">
     <div class="content-header">
       <div>
@@ -58,20 +66,20 @@
                 </div>
               </a>
             </div>
-            <div class="col-lg-2 col-sm-2 col-4 col-price">
+            <div class="col-lg-1 col-sm-2 col-4 col-price">
               <span><%= coupon.couponDiscount %></span>
             </div>
             <div class="col-lg-2 col-sm-2 col-4 col-price">
-                <span><%= coupon.couponMinAmount %></span>
+                <span>&#8377;<%= coupon.couponMinAmount %></span>
               </div>
-            <div class="col-lg-2 col-sm-2 col-4 col-status">
+            <div class="col-lg-1 col-sm-2 col-4 col-status">
               <span class="badge rounded-pill alert-success"><%= coupon.Status %></span
               >
             </div>
-            <div class="col-lg-1 col-sm-2 col-4 col-date">
+            <div class="col-lg-2 col-sm-2 col-4 col-date">
               <span><%= coupon.expireDate.toISOString().split('T')[0]  %></span>
             </div>
-            <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+            <div class="col-lg-3 col-sm-2 col-4 col-action text-end">
               <a
                 href="/admin/editCoupon/<%=coupon._id %>"
                 class="btn btn-sm font-sm rounded btn-brand"

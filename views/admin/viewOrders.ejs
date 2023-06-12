@@ -1,0 +1,127 @@
+<main class="main">
+    <section class="mt-50 mb-50">
+      <div class="container">
+        <div><h1 style="text-align: center; padding-bottom: 50px; color: rgb(0, 84, 193);">View Order Details</h1></div>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table shopping-summery text-center">
+                <thead>
+                  <tr class="main-heading">
+                    <th scope="col" colspan="2">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Stock Status</th>
+                    <th scope="col">Action</th>
+                    <!-- <th scope="col">Remove</th> -->
+                  </tr>
+                </thead>
+                <div>
+                <tbody>
+                  <% orderDetails.products.forEach(product => { %>
+                  <tr>
+                    <td class="image product-thumbnail">
+                      <img
+                        src="/productImages/<%=product.prodId.productImages[0] %>"
+                        alt="#"
+                      />
+                    </td>
+                    <td class="product-des product-name">
+                      <h5 class="product-name">
+                        <a href="shop-product-right.html"
+                          ><%= product.prodId.productName %></a
+                        >
+                      </h5>
+                    </td>
+                    <td class="price" data-title="Price">
+                      <span><%= product.prodId.productPrice %></span>
+                    </td>
+                    <td class="text-center" data-title="Stock">
+                      <span class="color3 font-weight-bold">In Stock</span>
+                    </td>
+                    <td class="action" data-title="Remove">
+                      <a href="#"><i class="fi-rs-trash"></i></a>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </div>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- <script>
+    function addtoCart(prodId) {
+      console.log('test on lick');
+      const quantity = 1;
+      fetch("/addtoCart/" + prodId, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ quantity: quantity }),
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+            console.log("toastr errror ");
+          }
+          // Handle successful response from server
+          // toastr.success('Product added to cart')
+          Toastify({
+            text: "PRODUCT ADDED TO THE CART",
+            duration: 3000,
+            //   destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () {}, // Callback after click
+          }).showToast();
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    }
+  </script> -->
+  
+  <!-- <script>
+     async function removeFromWishlist(prodId) {
+          await $.ajax({
+          url: "/removeFromWishlist/" + prodId,
+          method: "post",
+          success: (response) => {
+              console.log('test');
+              if(response.status=== true){
+                  $('#wishlist tr[data-prodId="' + prodId + '"]').remove();
+              }
+              
+              
+            Toastify({
+                text: response.message,
+                duration: 1000,
+    
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: "linear-gradient(to right, #00b09b, #96c93d)",
+                },
+                onClick: function () {}, // Callback after click
+              }).showToast();
+          },
+          error: (error) => {
+            console.error("Error:", error);
+          },
+        });
+      }
+    </script> -->

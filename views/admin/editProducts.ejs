@@ -1,3 +1,9 @@
+<style>
+    input[type='file']{
+        color: transparent;
+    }
+</style>
+
 <section class="content-main">
     <div class="row">
         <div class="col-6">
@@ -82,8 +88,12 @@
                                 <div class="col-md-9">
                                     <div class="mb-4">
                                         <label class="form-label">Images</label>
-                                        <input class="form-control" name="productimages" type="file" multiple required>
-                                        <img src="/productImages/<%=item.productImages[0] %>">
+                                        <input class="form-control" name="productimages" type="file" id="files" multiple >
+                                        <% item.productImages.forEach(images => { %>
+                                            <label for="files"><%=images %></label>
+                                            <img src="/productImages/<%=images %>" width="100" class="mt-1" style="max-height: 100px; max-width: 50px;">
+                                            <input type="hidden" name="old_image" value="<%=images %>"/>
+                                        <% }) %>
                                     </div>
                                 </div> 
                             </div> <!-- .row end// -->

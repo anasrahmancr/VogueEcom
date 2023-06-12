@@ -61,7 +61,7 @@ module.exports = {
       resolve(category);
     });
   },
-  editproduct: (data, prodId) => {
+  editproduct: (image, data, prodId) => {
     return new Promise(async (resolve, reject) => {
       try{
         const products = await product.findOne({ _id: new Object(prodId) });
@@ -76,7 +76,7 @@ module.exports = {
             productDescription: data.productdescription,
             brands: data.brandName,
             category: data.mycategory,       
-            productImages: data.images,
+            productImages: image,
           })
           resolve({status: true})
         }
