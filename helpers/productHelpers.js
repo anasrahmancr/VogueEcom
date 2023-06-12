@@ -45,12 +45,18 @@ module.exports = {
 
   addCategory: (data) => {
     return new Promise(async (resolve, reject) => {
-      let { categoryname } = data;
-      let categoryData = new Category({
-        categoryName: categoryname,
-      });
-      categoryData.save();
-      resolve({ categoryData, status: true });
+      const { categoryname } = data;
+      const checkDuplicate = await Category.find({categoryName: categoryname})
+      if(!checkDuplicate){
+        const categoryData = new Category({
+          categoryName: categoryname,
+        });
+        categoryData.save();
+        resolve({ categoryData, status: true });
+      } else{
+        resolve({status: false, message: 'Provide a Unique Name'})
+      }
+      
     });
   },
 
@@ -91,7 +97,7 @@ module.exports = {
       try {
         const skip = (currentPage - 1) * itemsPerPage;
         const totalProducts = await product.countDocuments();
-        const products = await product.find().skip(skip).limit(itemsPerPage);
+        const products = await product.find().sort({ updatedAt: -1 }).skip(skip).limit(itemsPerPage);
         const totalPages = Math.ceil(totalProducts / itemsPerPage);
         resolve({currentPage: currentPage, products: products, totalPages: totalPages})
       } catch (error) {

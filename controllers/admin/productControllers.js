@@ -10,27 +10,38 @@ const {
 
 module.exports = {
   productManagement: (req, res) => {
-    const itemsPerPage = 9;
+    try{
+      const itemsPerPage = 9;
     const currentPage = parseInt(req.query.page) || 1;
       getProducts(itemsPerPage, currentPage).then((response) => {
         res.render('admin/productLists',{currentPage: response.currentPage, products: response.products, totalPages: response.totalPages})
-        // res.render("admin/productLists", { products,  admin: true });
       });
+    } catch(error){
+      console.log(error.message);
+    }
   },
 
   addProducts: (req, res) => {
-    getCategory().then((response) => {
-      const categories = response;
-      res.render("admin/addProducts", { categories, admin:true });
-    });
+    try{
+      getCategory().then((response) => {
+        const categories = response;
+        res.render("admin/addProducts", { categories, admin:true });
+      });
+    } catch(error){
+      console.log(error);
+    }
   },
 
   addProductData: (req, res) => {
-    productData(req.body,req.files).then((response) => {
-      if (response.status) {
-        res.redirect("/admin/productManagement");
-      }
-    });
+    try{
+      productData(req.body,req.files).then((response) => {
+        if (response.status) {
+          res.redirect("/admin/productManagement");
+        }
+      });
+    } catch(error){
+      console.log(error.message);
+    }
   },
 
   editProducts: (req, res) => {
@@ -88,8 +99,10 @@ module.exports = {
 
   addCategory: (req, res) => {
     addCategory(req.body).then((response) => {
-      if (response.categoryData) {
+      if (response.status) {
         res.redirect("/admin/category");
+      } else{
+        res.render('admin/category',{errorMessage: response.message})
       }
     });
   },

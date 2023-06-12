@@ -77,7 +77,7 @@ router.get('/codSuccess',userLogin, codSuccess)
 
 router.post('/cancelOrder/:id', userLogin, cancelOrder)
 router.post('/returnProducts/:id', userLogin, returnProducts)
-router.get('/vieworderedProducts/:id', userLogin, vieworderedProducts)
+router.get('/viewOrderedProducts/:id', userLogin, vieworderedProducts)
 
 
 // Wishlist

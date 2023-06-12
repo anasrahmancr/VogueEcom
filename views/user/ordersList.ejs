@@ -22,16 +22,16 @@
                 <tbody>
                     <% orders.forEach(order => { %>
                     <tr data-orderId="<%= order._id %>">
-                        <td><a href="#" class="btn">View Products</a></td>
+                        <td><a href="/viewOrderedProducts/<%= order._id %>" class="btn">View Products</a></td>
                         <td class="fw-bold"><%=order._id %></td>
                         <td><%= order.deliveryAddress[0].fname %> <%= order.deliveryAddress[0].lname%></td>
                         <td>
                             <%= order.date.toISOString().split('T')[0] %>
                         </td>
                         <td>
-                            <%=order.totalAmount %>
+                          &#8377;<%=order.totalAmount %>
                         </td>
-                        <td>&#8377;<%=order.shipping_status %>
+                        <td><%=order.shipping_status %>
                         </td>
                         <td>
                           <% if (order.paymentMethod === 'onlinepayment') { %>

@@ -160,7 +160,12 @@ module.exports = {
 
   viewOrderedProducts: (orderId) => {
     return new Promise(async(resolve, reject) => {
-        
-    })
+      try {
+          const orderDetails = await Order.findOne({_id: orderId}).populate('products.prodId');
+          resolve(orderDetails)
+        } catch (error) {
+          console.log(error.message,"err messsage");
+        }
+  })
   }
 };

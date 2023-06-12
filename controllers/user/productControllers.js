@@ -14,15 +14,13 @@ module.exports = {
 
     },
     shopView: (req,res) => {
-        let query = {}
-        if (req.session.query) {
-            query = req.session.query
-            console.log(query,"inside fif query");
+        let query = {};
+        if (req.session.query && req.session.query === req.query.sort ) {  
+            query = req.session.query;
         } else{
             query = req.query.sort; 
         }
-        const page =  req.query.page ? req.query.page : 1;
-        console.log(query, page,"fil, page");
+        const page =  req.query.page ? req.query.page : 1; 
         req.session.query = query;
         filterProducts(query).then(data => {
             shopProducts(data, page).then(response => {

@@ -75,8 +75,8 @@ module.exports = {
     },
 
     vieworderedProducts: (req, res) => {
-        viewOrderedProducts(req.params.id).then(response => {
-
+        viewOrderedProducts(req.params.id).then(orderDetails => {
+            res.render('user/viewOrderDetails', {orderDetails})
         })
     }
 }

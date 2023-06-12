@@ -6,20 +6,12 @@ module.exports = {
             try {
                 const skip = (currentPage - 1) * itemsPerPage;
                 const totalOrders = await Order.countDocuments();
-                const orders = await Order.find().skip(skip).limit(itemsPerPage);
+                const orders = await Order.find().sort({ createdAt: -1 }).skip(skip).limit(itemsPerPage);
                 const totalPages = Math.ceil(totalOrders / itemsPerPage);
                 resolve({currentPage: currentPage, orders: orders, totalPages: totalPages})
               } catch (error) {
                 res.status(500).send('An error occurred');
               }
-            /////////////////////////
-            await Order.find().then((orders)=> {
-                if(orders){
-                    resolve({status: true, orders: orders});
-                } else{
-                    resolve({status: false})
-                }
-            })
         })
     }, 
 

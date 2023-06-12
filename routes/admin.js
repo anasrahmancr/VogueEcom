@@ -18,7 +18,7 @@ router.use(adminMiddleware)
 router.get('/',adminTrue,dashboard)
 
 //Auth
-router.get('/adminLogin',adminLogin)
+router.get('/adminLogin', adminLogin)
 router.post('/adminLogin',adminLoginData)
 router.get('/adminLogout',adminLogout)
 
@@ -33,7 +33,7 @@ router.get('/deleteProduct/:id', deleteProduct)
  
 //Category Management
 router.get('/category',adminTrue,category)
-router.post('/addCategory',addCategory)
+router.post('/addCategory', adminTrue, addCategory)
 
 //User Management
 router.get('/userManagement',adminTrue,userManagement)
