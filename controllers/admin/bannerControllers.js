@@ -9,47 +9,66 @@ const {
 
 module.exports = {
   addBanner: (req, res) => {
-    res.render("admin/addBanner");
+    try{
+      res.render("admin/addBanner");
+    } catch(err){
+      console.log(err.message);
+    }
+    
   },
 
   addBannerData: (req, res) => {
-    addbanner(req.body, req.files).then((response) => {
-      res.redirect("/admin/listBanners");
-    });
+    try{
+      addbanner(req.body, req.files).then((response) => {
+        res.redirect("/admin/listBanners");
+      });
+    } catch(err){
+      console.log(err.message);
+    }
+    
   },
 
   listBanner: (req, res) => {
-    const itemsPerPage = 9;
+    try{
+      const itemsPerPage = 9;
     const currentPage = parseInt(req.query.page) || 1;
     getBanner(itemsPerPage, currentPage).then((response) => {
       res.render('admin/bannerLists',{currentPage: response.currentPage, getbanner: response.banners, totalPages: response.totalPages})
     });
+    } catch(err){
+      console.log(err.message);
+    }
   },
 
   editBanner: (req, res) => {
-    editbanner(req.params.id).then((response) => {
-      if (response.status) {
-        if (response.editBanner.Status) {
+    try{
+      editbanner(req.params.id).then((response) => {
+        if (response.status) {
+          if (response.editBanner.Status) {
+            
+            const isActive = "enable";
+            const editBanner = response.editBanner;
+            res.render("admin/editBanner", {editBanner: editBanner,isActive: isActive,
+            });
+          } else {
           
-          const isActive = "enable";
-          const editBanner = response.editBanner;
-          res.render("admin/editBanner", {editBanner: editBanner,isActive: isActive,
-          });
+            const isActive = "disable";
+            const editBanner = response.editBanner;
+            res.render("admin/editBanner", {editBanner: editBanner, isActive: isActive,
+            });
+          }
         } else {
-        
-          const isActive = "disable";
-          const editBanner = response.editBanner;
-          res.render("admin/editBanner", {editBanner: editBanner, isActive: isActive,
-          });
+          res.render("/listBanners", { message: response.message });
         }
-      } else {
-        res.render("/listBanners", { message: response.message });
-      }
-    });
+      });
+    } catch(err){
+      console.log(err.message);
+    }
   },
 
   updateBanner: (req, res) => {
-    updatebanner(req.params.id, req.body, req.files).then((response) => {
+    try{
+      updatebanner(req.params.id, req.body, req.files).then((response) => {
         if(response.status){
             // req.flash('success', 'Banner updated successfully.');
             res.redirect('/admin/listBanners')
@@ -58,17 +77,25 @@ module.exports = {
             res.redirect('/admin/listBanners')
         }
     });
+    }catch(err){
+      console.log(err.message);
+    }
   },
 
   deleteBanner: (req, res) => {
-    deletebanner(req.params.id).then(response => {
-      if(response.status){
-        const message = response.message;
-        res.json({status: response.status, message: message, updatedBanner: response.updatedBanner});
-      } else{
-        const message = response.message;
-        res.json({status: response.status, message: message});
-      }
-    })
+    try{
+      deletebanner(req.params.id).then(response => {
+        if(response.status){
+          const message = response.message;
+          res.json({status: response.status, message: message, updatedBanner: response.updatedBanner});
+        } else{
+          const message = response.message;
+          res.json({status: response.status, message: message});
+        }
+      })
+    } catch(err){
+      console.log(err.message);
+    }
   }
+  
 };

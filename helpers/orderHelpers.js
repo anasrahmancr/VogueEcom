@@ -27,7 +27,6 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         let items = await Cart.findOne({ user_id: user }).populate('items.prodId');
-        console.log(items.items,"itsmes s ");
         const total = items.Total;
         if (!items) {
           resolve({ status: false, message: "Cart not found" });

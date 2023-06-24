@@ -1,136 +1,91 @@
 <section class="content-main">
-
   <div class="content-header">
-
-      <div>
-
-          <h2 class="content-title card-title" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Order Details</h2>
-
-      </div>
-
+    <div>
+      <h2
+        class="content-title card-title"
+        style="font-family: Verdana, Geneva, Tahoma, sans-serif"
+      >
+        Order Details
+      </h2>
+    </div>
   </div>
-
   <div class="card mb-4">
-
     <div class="card-body">
-
       <article class="itemlist">
-
         <div class="row align-items-center">
-
-            <div class=" flex-grow-1 col-name">
-
-                <div class="itemside">
-
-                    <div class="left col-lg-1 col-sm-4 col-8 h6">
-
-                        Image
-
-                    </div>
-
-                    <div class="info col-lg-2 col-sm-4 col-8">
-
-                        <h6 class="mb-0 h6">Name</h6>
-
-                    </div>
-
-                    <div class="info col-lg-2 col-sm-4 col-8">
-
-                        <h6 class="mb-0 tooltipEll h6">Description</h6>
-
-                    </div>
-
-                    <div class="info col-lg-2 col-sm-4 col-8">
-
-                        <h6 class="mb-0 tooltipEll h6">Brand</h6>
-
-                    </div>
-
-                    <div class="col-price col-lg-2 col-sm-4 col-8 h6"> <span>Date</span> </div>
-
-
-
-
-                    <div class="col-price col-lg-1 col-sm-4 col-8 h6">Quantity</span> </div>
-
-                    <div class="col-price col-lg-2 col-sm-4 col-8 h6"> <span>Selling Price</span> </div>
-
-                    
-
-                </div>
-
-            </div>
-
-        </div> <!-- row .// -->
-
-    </article>
-<% orderDetails.products.forEach(product => { %>        
-
-      <article class="itemlist">
-
-          <div class="row align-items-center">
-
-              <div class=" flex-grow-1 col-name">
-
-                  <div class="itemside">
-
-                      <div class="left col-lg-1 col-sm-4 col-8">
-
-                          <img src="/productImages/<%=product.prodId.productImages[0] %>" class="img-sm img-thumbnail" alt="Item">
-
-                      </div>
-
-                      <div class="info col-lg-2 col-sm-4 col-8">
-
-                          <h6 class="mb-0"><%= product.prodId.productName %></h6>
-
-                      </div>
-
-                      <div class="info col-lg-2 col-sm-4 col-8">
-
-                          <h6 class="mb-0 tooltipEll"><%= product.prodId.productDescription %></h6>
-
-                      </div>
-
-                      <div class="info col-lg-2 col-sm-4 col-8">
-
-                          <h6 class="mb-0 tooltipEll"><%= product.prodId.brands %></h6>
-
-                      </div>
-
-                      <div class="col-price col-lg-2 col-sm-4 col-8"> <span> <%= orderDetails.date.toISOString().split('T')[0] %></span> </div>
-
-
-
-
-                      <div class="col-price col-lg-1 col-sm-4 col-8"> <span> <%= product.quantity %></span> </div>
-
-                      <div class="col-price col-lg-1 col-sm-4 col-8"> <span>₹ <%= product.prodId.productSalePrice %></span> </div>
-
-                      
-
-                  </div>
-
+          <div class="flex-grow-1 col-name">
+            <div class="itemside">
+              <div class="left col-lg-1 col-sm-4 col-8 h6">Image</div>
+              <div class="info col-lg-2 col-sm-4 col-8">
+                <h6 class="mb-0 h6">Name</h6>
               </div>
-
-          </div> <!-- row .// -->
-
-      </article> <!-- itemlist  .// -->
-
-      <% }) %>
-
-      <div class="row mt-3" style="justify-content: flex-end;">
-
+              <div class="info col-lg-2 col-sm-4 col-8">
+                <h6 class="mb-0 tooltipEll h6">Description</h6>
+              </div>
+              <div class="info col-lg-2 col-sm-4 col-8">
+                <h6 class="mb-0 tooltipEll h6">Brand</h6>
+              </div>
+              <div class="col-price col-lg-2 col-sm-4 col-8 h6">
+                <span>Date</span>
+              </div>
+              <div class="col-price col-lg-1 col-sm-4 col-8 h6">
+                <span>Quantity</span>
+              </div>
+              <div class="col-price col-lg-2 col-sm-4 col-8 h6">
+                <span>Selling Price</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row .// -->
+      </article>
+      <article class="itemlist">
+        <% orderDetails.products.forEach(product => { %>
+        <div class="row align-items-center">
+          <div class="flex-grow-1 col-name">
+            <div class="itemside">
+              <div class="left col-lg-1 col-sm-4 col-8">
+                <img
+                  src="/productImages/<%=product.prodId.productImages[0] %>"
+                  class="img-sm img-thumbnail"
+                  alt="Item"
+                />
+              </div>
+              <div class="info col-lg-2 col-sm-4 col-8">
+                <h6 class="mb-0"><%= product.prodId.productName %></h6>
+              </div>
+              <div class="info col-lg-2 col-sm-4 col-8">
+                <h6 class="mb-0 tooltipEll">
+                  <%= product.prodId.productDescription %>
+                </h6>
+              </div>
+              <div class="info col-lg-2 col-sm-4 col-8">
+                <h6 class="mb-0 tooltipEll"><%= product.prodId.brands %></h6>
+              </div>
+              <div class="col-price col-lg-2 col-sm-4 col-8">
+                <span>
+                  <%= orderDetails.date.toISOString().split('T')[0] %></span
+                >
+              </div>
+              <div class="col-price col-lg-1 col-sm-4 col-8">
+                <span> <%= product.quantity %></span>
+              </div>
+              <div class="col-price col-lg-1 col-sm-4 col-8">
+                <span>₹ <%= product.prodId.productSalePrice %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- row .// -->
+        <% }) %>
+      </article>
+      <!-- itemlist  .// -->
+      <div class="row mt-3" style="justify-content: flex-end">
         <div class="col-md-10 h3">Total Amount:</div>
-
         <div class="col-md-2 h4">₹<%= orderDetails.totalAmount %></div>
-
       </div>
-
-      
-
-  </div> <!-- card-body end// -->
-
-</div> <!-- card end// -->
-
+    </div>
+    <!-- card-body end// -->
+  </div>
+  <!-- card end// -->
 </section>

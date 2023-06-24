@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../config/multer')
-const {dashboard} = require('../controllers/admin/homeControllers')
+const {salesgraph} = require('../controllers/admin/homeControllers')
 const {productManagement, addProducts, addProductData, editProducts, editProductData, category, addCategory, deleteProduct} = require('../controllers/admin/productControllers')
 const {userManagement, blockUser, unBlockUser, editUser} = require('../controllers/admin/userControllers')
 const {orderManagement, changeOrderStatus, viewOrderDetails} = require('../controllers/admin/orderControllers')
@@ -15,7 +15,7 @@ router.use(adminMiddleware)
 // router.use(adminheaderMiddleware)
 
 // DASHBOARD
-router.get('/',adminTrue,dashboard)
+router.get('/',adminTrue,salesgraph);
 
 //Auth
 router.get('/adminLogin', adminLogin)
